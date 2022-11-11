@@ -23,6 +23,15 @@ keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Plugins --
+-- Packer
+keymap('n', '<leader>ps', ':PackerSync<CR>', opts)
+keymap('n', '<leader>pS', ':PackerStatus<CR>', opts)
+keymap('n', '<leader>pu', ':PackerUpdate<CR>', opts)
+keymap('n', '<leader>pc', ':PackerCompile<CR>', opts)
+keymap('n', '<leader>prs', ':PackerSnapshot', {})
+keymap('n', '<leader>prr', ':PackerSnapshotRollback', {})
+keymap('n', '<leader>prd', ':PackerSnapshotDelete', {})
+
 -- Alpha
 keymap('n', '<leader>;', ':Alpha<CR>', opts)
 
