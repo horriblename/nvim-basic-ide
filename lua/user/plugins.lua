@@ -101,6 +101,121 @@ return packer.startup(function(use)
   use { "rcarriga/nvim-dap-ui", commit = "1cd4764221c91686dcf4d6b62d7a7b2d112e0b13" }
   use { "ravenxrz/DAPInstall.nvim", commit = "8798b4c36d33723e7bba6ed6e2c202f84bb300de" }
 
+  -- Other Plugins (that I added)
+  use { "folke/which-key.nvim",
+    config = function ()
+      require'which-key'.setup {}
+    end
+  }
+  use { "simnalamburt/vim-mundo",
+    cmd = "Mundo*",
+  }
+  use { 'abecodes/tabout.nvim',
+    event = "BufRead",
+    wants = { 'nvim-treesitter' },
+    after = { 'nvim-cmp' },
+    config = function()
+      require('tabout').setup {
+        tabkey = '<C-.>',
+        backwards_tabkey = '<C-,>',
+        act_as_tab = true,
+      }
+    end
+  }
+  use { 'pianocomposer321/project-templates.nvim',
+    cmd = { 'LoadTemplate', "DeleteTemplate", "SaveAsTemplate" },
+    config = function()
+      vim.g.project_templates_dir = '~/Templates/'
+    end,
+  }
+  -- treesitter plugins
+  use { "romgrk/nvim-treesitter-context",
+    wants = { 'nvim-treesitter' },
+    config = function()
+      --vim.cmd [[ hi! link TreesitterContext CursorColumn ]]
+      require("treesitter-context").setup {
+        enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+        throttle = true, -- Throttles plugin updates (may improve performance)
+        max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+        patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+        -- For all filetypes
+        -- Note that setting an entry here replaces all other patterns for this entry.
+        -- By setting the 'default' entry below, you can control which nodes you want to
+        -- appear in the context window.
+        c = {
+          'struct'
+        },
+        go = {
+          'for',
+          'if',
+          'switch',
+          'case',
+          'func',
+          'interface',
+          'struct',
+        },
+        markdown = {
+          'heading_content',
+          -- 'list_item'
+        },
+      },
+    }
+    end
+   }
+
+   use { 'stevearc/aerial.nvim',
+     event = "BufRead",
+     cmd = 'Aerial*',
+     wants = { 'nvim-treesitter' },
+     config = function()
+       require('aerial').setup {}
+       -- Toggle the aerial window with <leader>a
+       vim.api.nvim_set_keymap('n', '<leader>a', '<cmd>AerialToggle!<CR>', {})
+       vim.api.nvim_set_keymap('n', '{', '<cmd>AerialPrev<CR>', {})
+       -- Jump up the tree with '[[' or ']]'
+       vim.api.nvim_set_keymap('n', '}', '<cmd>AerialNext<CR>', {})
+       -- Jump forwards/backwards with '{' and '}'
+       vim.api.nvim_set_keymap('n', '[[', '<cmd>AerialPrevUp<CR>', {})
+       vim.api.nvim_set_keymap('n', ']]', '<cmd>AerialNextUp<CR>', {})
+     end,
+   }
+
+	use { "norcalli/nvim-colorizer.lua",
+		event = "BufRead",
+		wants = { 'nvim-treesitter' },
+		config = function()
+			require("colorizer").setup({ "*" }, {
+				RGB = true, -- #RGB hex codes
+				RRGGBB = true, -- #RRGGBB hex codes
+				RRGGBBAA = true, -- #RRGGBBAA hex codes
+				rgb_fn = true, -- CSS rgb() and rgba() functions
+				hsl_fn = true, -- CSS hsl() and hsla() functions
+				css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+				css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+			})
+		end,
+	}
+
+   use { "folke/persistence.nvim",
+     -- event = "BufReadPre", -- this will only start session saving when an actual file was opened
+     -- module = "persistence",
+     config = function()
+       require("persistence").setup {
+         dir = vim.fn.expand(vim.fn.stdpath("state") .. "/sessions/"), -- directory where session files are saved
+         options = { "buffers", "curdir", "tabpages", "winsize" },
+       }
+     end,
+   }
+
+   use { "p00f/nvim-ts-rainbow" }
+   use { 'nvim-treesitter/playground',
+     wants = { 'nvim-treesitter' },
+     cmd = "TSPlaygroundToggle",
+     config = function()
+       require('nvim-treesitter.configs').setup {}
+     end
+   }
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then

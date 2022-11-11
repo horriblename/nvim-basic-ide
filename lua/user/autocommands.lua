@@ -32,11 +32,11 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "CmdWinEnter" }, {
-	callback = function()
-		vim.cmd("quit")
-	end,
-})
+-- vim.api.nvim_create_autocmd({ "CmdWinEnter" }, {
+-- 	callback = function()
+-- 		vim.cmd("quit")
+-- 	end,
+-- })
 
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 	callback = function()
@@ -57,6 +57,15 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
 	end,
 })
 
+vim.api.nvim_create_autocmd("VimEnter", {
+  -- group = group_id,
+  pattern = "*",
+  nested = true,
+  callback = function()
+    require('alpha').start(true)
+  end,
+})
+
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 	callback = function()
 	local line_count = vim.api.nvim_buf_line_count(0)
@@ -66,3 +75,9 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 	end,
 })
 
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+  pattern = { "*.png", "*.jpg", "*.svg"},
+  callback = function ()
+    vim.cmd "call jobstart('nsxiv -N nsxiv-float ' .. expand('%')) | bd"
+  end,
+})

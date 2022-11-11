@@ -1,0 +1,12 @@
+{
+   "Swap in Array": {
+		"description": "Swap 2 Elements in an Array.",
+      "prefix": "swap",
+      "body": [
+         "const temp = ${1:array}[${2:a}];",
+			"$1[${2:a}] = $1[${3:b}];",
+			"$1[${3:b}] = temp;",
+			"$0"
+      ]
+   }
+}

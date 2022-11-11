@@ -11,6 +11,7 @@ end
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
 nvim_tree.setup {
+  sync_root_with_cwd = true,
   update_focused_file = {
     enable = true,
     update_cwd = true,
@@ -64,4 +65,45 @@ nvim_tree.setup {
       },
     },
   },
+  on_attach = function(bufnr)
+    -- local inject_node = require('nvim-tree.utils').inject_node
+    local dispatcher = function(action)
+      return function() require('nvim-tree.actions.dispatch').dispatch(action) end
+    end
+
+    local bind = function(key, action)
+      if action == nil then
+        -- keymap may not exist?
+        pcall(vim.keymap.del, 'n', key, { buffer = bufnr })
+      else
+        vim.keymap.set('n', key, action, { buffer = bufnr , nowait = true })
+      end
+    end
+
+
+    local mappings = {
+      { key = { "<C-t>", "c", "d", "D" }, action = nil },
+      { key = "i", action = dispatcher "toggle_file_info" },
+      { key = "y", action = dispatcher "copy" },
+      { key = "v", action = dispatcher "vsplit" },
+      { key = "s", action = dispatcher "split" },
+      -- { key = "cf", action = dispatcher "copy_name" },
+      { key = "cl", action = dispatcher "copy_absolute_path" },
+      { key = "gx", action = dispatcher "system_open" },
+      { key = "l", action = dispatcher "edit" },
+      { key = "dd", action = dispatcher "trash" },
+      { key = "DD", action = dispatcher "remove" },
+      { key = "Z", action = ':Z ' },
+    }
+
+    for _, mapping in ipairs(mappings) do
+      if type(mapping.key) == "string" then
+        bind(mapping.key, mapping.action)
+      else for _, key in ipairs(mapping.key) do
+          bind(key, mapping.action)
+        end
+      end
+
+    end
+  end
 }

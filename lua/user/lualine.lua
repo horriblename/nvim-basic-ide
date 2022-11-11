@@ -12,8 +12,8 @@ local diagnostics = {
   sources = { "nvim_diagnostic" },
   sections = { "error", "warn" },
   symbols = { error = " ", warn = " " },
-  colored = false,
-  always_visible = true,
+  colored = true,
+  -- always_visible = true,
 }
 
 local diff = {
@@ -25,7 +25,9 @@ local diff = {
 
 local filetype = {
   "filetype",
-  icons_enabled = false,
+  colored = false,
+  icon_only = true,
+  -- icons_enabled = true,
 }
 
 local location = {
@@ -48,10 +50,10 @@ lualine.setup {
     always_divide_middle = true,
   },
   sections = {
-    lualine_a = { "mode" },
+    lualine_a = { filetype, "filename" },
     lualine_b = {"branch"},
     lualine_c = { diagnostics },
-    lualine_x = { diff, spaces, "encoding", filetype },
+    lualine_x = { diff, spaces, "encoding" },
     lualine_y = { location },
     lualine_z = { "progress" },
   },

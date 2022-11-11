@@ -16,53 +16,44 @@ vim.g.mapleader = " "
 --   command_mode = "c",
 
 -- Normal --
--- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
-
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
 keymap("n", "<C-Down>", ":resize +2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
--- Navigate buffers
-keymap("n", "<S-l>", ":bnext<CR>", opts)
-keymap("n", "<S-h>", ":bprevious<CR>", opts)
-
--- Clear highlights
-keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", opts)
-
--- Close buffers
-keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
-
--- Better paste
-keymap("v", "p", '"_dP', opts)
-
--- Insert --
--- Press jk fast to enter
-keymap("i", "jk", "<ESC>", opts)
-
--- Visual --
--- Stay in indent mode
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
-
 -- Plugins --
+-- Alpha
+keymap('n', '<leader>;', ':Alpha<CR>', opts)
+
+-- ToggleTerm
+keymap({'n', 'i'}, '<M-x>', '<cmd>ToggleTerm<CR>', opts)
+
+
+-- BufferLine/buffer control
+keymap({'n', 'i'}, '<M-n>', '<cmd>BufferLineCycleNext<CR>', opts)
+keymap({'n', 'i'}, '<M-p>', '<cmd>BufferLineCyclePrev<CR>', opts)
+keymap('n', '<leader>c', ':Bdelete<CR>', opts)
+keymap('n', '<leader>C', ':Bdelete!<CR>', opts)
+keymap('n', '<leader>bh', ':BufferLineCloseLeft<CR>', opts)
+keymap('n', '<leader>bl', ':BufferLineCloseRight<CR>', opts)
+keymap('n', '<leader>bD', ':BufferLineSortByDirectory<CR>', opts)
+keymap('n', '<leader>bE', ':BufferLineSortByExtension<CR>', opts)
 
 -- NvimTree
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
 -- Telescope
-keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
-keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
-keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
-keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
+keymap("n", "<leader>f", ":Telescope find_files<CR>", opts)
+keymap("n", "<leader>sf", ":Telescope find_files<CR>", opts)
+keymap("n", "<leader>st", ":Telescope live_grep<CR>", opts)
+keymap("n", "<leader>sp", ":Telescope projects<CR>", opts)
+keymap("n", "<leader>sb", ":Telescope buffers<CR>", opts)
 
 -- Git
-keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
+keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", {silent=true, desc='Lazygit'})
+keymap("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", {silent=true, desc='Search commits'})
+keymap("n", "<leader>gc", "<cmd>Telescope git_bcommits<CR>", {silent = true, desc='Search commits for current buffer'})
 
 -- Comment
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
