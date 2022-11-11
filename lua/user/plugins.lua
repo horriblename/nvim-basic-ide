@@ -105,6 +105,7 @@ return packer.startup(function(use)
   use { "folke/which-key.nvim",
     config = function ()
       require'which-key'.setup {}
+		vim.opt.timeoutlen = 0
     end
   }
   use { "simnalamburt/vim-mundo",
