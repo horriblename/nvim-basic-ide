@@ -72,8 +72,22 @@ keymap("n", "<leader>sb", ":Telescope buffers<CR>", opts)
 -- Git
 prefix('g', 'Git')
 keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", {silent=true, desc='Lazygit'})
-keymap("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", {silent=true, desc='Search commits'})
-keymap("n", "<leader>gc", "<cmd>Telescope git_bcommits<CR>", {silent = true, desc='Search commits for current buffer'})
+keymap("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", {silent=true, desc='Checkout commit'})
+keymap("n", "<leader>gC", "<cmd>Telescope git_bcommits<CR>", {silent = true, desc='Checkout commit for current file'})
+keymap("n", "<leader>gb", "<cmd>Telescope git_branches<CR>", {silent = true, desc='Checkout branch'})
+keymap("n", "<leader>go", "<cmd>Telescope git_status<CR>", {silent = true, desc='Open changed file'})
+
+keymap("n", "<leader>gj", "<cmd>Gitsigns next_hunk<CR>", opts)
+keymap("n", "<leader>gk", "<cmd>Gitsigns prev_hunk<CR>", opts)
+
+keymap("n", "<leader>gs", "<cmd>Gitsigns stage_hunk<CR>", opts)
+keymap("n", "<leader>gu", "<cmd>Gitsigns undo_stage_hunk<CR>", opts)
+keymap("v", "<leader>gs", "<cmd>Gitsigns stage_hunk<CR>", opts)
+keymap("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<CR>", opts)
+keymap("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", opts)
+keymap("n", "<leader>gR", "<cmd>Gitsigns reset_buffer<CR>", opts)
+keymap("n", "<leader>gl", "<cmd>Gitsigns blame_line<CR>", opts)
+keymap("n", "<leader>gd", "<cmd>Gitsigns diffthis HEAD<CR>", opts)
 
 -- Comment
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
