@@ -4,7 +4,13 @@ if not status_ok then
 end
 
 local function lastSessionText()
-  local path = vim.fn.fnamemodify(require'persistence'.get_last(), ':t:r:gs|%|/|:~')
+	-- for some reason persistence.get_last() can fail
+	local ok, session = pcall(function() require 'persistence'.get_last() end)
+	if not ok or not session then
+		return '碑 Last session'  
+	end
+
+  local path = vim.fn.fnamemodify(session, ':t:r:gs|%|/|:~')
   return '碑 Last session: ' .. vim.fn.pathshorten(path)
 end
 
