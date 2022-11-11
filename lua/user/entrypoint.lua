@@ -1,6 +1,9 @@
 -- Turn off autoclose as it conflicts with autopairs
 vim.cmd [[AutoCloseOff]]
 
+vim.opt.packpath:prepend(require 'user.packerpath'.data_dir .. '/site')
+vim.cmd(('runtime! %s %s'):format('START', 'plugin/**/*.lua'))
+vim.cmd(('runtime! %s %s'):format('START', 'plugin/**/*.vim'))
 require "user.impatient"
 require "user.options"
 require "user.keymaps"
