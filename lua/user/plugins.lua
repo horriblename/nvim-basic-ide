@@ -199,6 +199,11 @@ return packer.startup(function(use)
 		end,
 	}
 
+  use { "p00f/nvim-ts-rainbow",
+    event = 'BufRead',
+    wants = { 'nvim-treesitter' },
+  }
+
    use { "folke/persistence.nvim",
      -- event = "BufReadPre", -- this will only start session saving when an actual file was opened
      -- module = "persistence",
@@ -210,7 +215,6 @@ return packer.startup(function(use)
      end,
    }
 
-   use { "p00f/nvim-ts-rainbow" }
    use { 'nvim-treesitter/playground',
      wants = { 'nvim-treesitter' },
      cmd = "TSPlaygroundToggle",
