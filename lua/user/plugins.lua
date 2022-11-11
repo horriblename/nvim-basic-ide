@@ -107,7 +107,7 @@ return packer.startup(function(use)
   use { "folke/which-key.nvim",
     config = function ()
       require'which-key'.setup {}
-		vim.opt.timeoutlen = 0
+      vim.opt.timeoutlen = 0
     end
   }
   use { "simnalamburt/vim-mundo",
@@ -209,8 +209,7 @@ return packer.startup(function(use)
      -- module = "persistence",
      config = function()
        require("persistence").setup {
-         dir = vim.fn.expand(vim.fn.stdpath("state") .. "/sessions/"), -- directory where session files are saved
-         options = { "buffers", "curdir", "tabpages", "winsize" },
+         dir = vim.fn.stdpath("state") .. "/sessions/", -- directory where session files are saved
        }
      end,
    }
