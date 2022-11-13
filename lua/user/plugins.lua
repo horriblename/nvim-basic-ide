@@ -107,7 +107,7 @@ return packer.startup(function(use)
   }
   use { 'abecodes/tabout.nvim',
     event = "BufRead",
-    wants = { 'nvim-treesitter' },
+    requires = { 'nvim-treesitter' },
     after = { 'nvim-cmp' },
     config = function()
       require('tabout').setup {
@@ -125,7 +125,7 @@ return packer.startup(function(use)
   }
   -- treesitter plugins
   use { "romgrk/nvim-treesitter-context",
-    wants = { 'nvim-treesitter' },
+    requires = { 'nvim-treesitter' },
     config = function()
       --vim.cmd [[ hi! link TreesitterContext CursorColumn ]]
       require("treesitter-context").setup {
@@ -161,7 +161,7 @@ return packer.startup(function(use)
    use { 'stevearc/aerial.nvim',
      event = "BufRead",
      cmd = 'Aerial*',
-     wants = { 'nvim-treesitter' },
+     after = { 'nvim-treesitter' },
      config = function()
        require('aerial').setup {}
        -- Toggle the aerial window with <leader>a
@@ -177,7 +177,7 @@ return packer.startup(function(use)
 
 	use { "norcalli/nvim-colorizer.lua",
 		event = "BufRead",
-		wants = { 'nvim-treesitter' },
+		requires = { 'nvim-treesitter' },
 		config = function()
 			require("colorizer").setup({ "*" }, {
 				RGB = true, -- #RGB hex codes
@@ -193,7 +193,7 @@ return packer.startup(function(use)
 
   use { "p00f/nvim-ts-rainbow",
     event = 'BufRead',
-    wants = { 'nvim-treesitter' },
+    requires = { 'nvim-treesitter' },
   }
 
    use { "folke/persistence.nvim",
@@ -207,7 +207,7 @@ return packer.startup(function(use)
    }
 
    use { 'nvim-treesitter/playground',
-     wants = { 'nvim-treesitter' },
+     requires = { 'nvim-treesitter' },
      cmd = "TSPlaygroundToggle",
      config = function()
        require('nvim-treesitter.configs').setup {}
