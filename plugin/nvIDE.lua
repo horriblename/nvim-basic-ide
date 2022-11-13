@@ -1,4 +1,8 @@
-vim.api.nvim_create_user_command('IDE', function ()
+if vim.fn.filereadable(vim.fn.stdpath 'cache' .. '/packer_compiled.lua') == 1 then
+  vim.cmd('source ' .. vim.fn.stdpath 'cache' .. '/packer_compiled.lua')
+end
+
+vim.api.nvim_create_user_command('IDESetup', function ()
   require 'user.entrypoint'
   if vim.fn.argc() == 0 then
     require 'alpha'.start()
