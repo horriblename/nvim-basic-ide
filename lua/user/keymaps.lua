@@ -1,13 +1,23 @@
 -- Shorten function name
 local keymap = vim.keymap.set
-local wk = require 'which-key'
-local prefix = function(key, name)
+local ok, wk = pcall(require, 'which-key')
+
+if ok then
+  wk.setup {}
+  vim.opt.timeoutlen = 0
+
+  -- Prefixes
   wk.register({
-    [key] = {
-      name = name
-    }
-  }, {prefix='<leader>'})
+    mode = { 'n', 'v' },
+    p = { name = 'Packer' },
+    b = { name = 'Buffer' },
+    g = { name = 'Git' },
+    d = { name = 'Debug' },
+    l = { name = 'LSP' }
+  }, {prefix = '<leader>'})
 end
+wk = nil -- just in case I'm dumb enough to call despite maybe not existing
+
 -- Silent keymap option
 local opts = { silent = true }
 
@@ -32,7 +42,6 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Plugins --
 -- Packer
-prefix('p', 'Packer')
 keymap('n', '<leader>ps', ':PackerSync<CR>', opts)
 keymap('n', '<leader>pS', ':PackerStatus<CR>', opts)
 keymap('n', '<leader>pu', ':PackerUpdate<CR>', opts)
@@ -48,7 +57,6 @@ keymap('n', '<leader>;', ':Alpha<CR>', opts)
 keymap({'n', 'i'}, '<M-x>', '<cmd>ToggleTerm<CR>', opts)
 
 -- BufferLine/buffer control
-prefix('b', 'BufferLine')
 keymap({'n', 'i'}, '<M-n>', '<cmd>BufferLineCycleNext<CR>', opts)
 keymap({'n', 'i'}, '<M-p>', '<cmd>BufferLineCyclePrev<CR>', opts)
 keymap('n', '<leader>c', ':Bdelete<CR>', opts)
@@ -62,7 +70,6 @@ keymap('n', '<leader>bE', ':BufferLineSortByExtension<CR>', opts)
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
 -- Telescope
-prefix('s', 'Telescope')
 keymap("n", "<leader>f", ":Telescope find_files<CR>", opts)
 keymap("n", "<leader>sf", ":Telescope find_files<CR>", opts)
 keymap("n", "<leader>st", ":Telescope live_grep<CR>", opts)
@@ -70,7 +77,6 @@ keymap("n", "<leader>sp", ":Telescope projects<CR>", opts)
 keymap("n", "<leader>sb", ":Telescope buffers<CR>", opts)
 
 -- Git
-prefix('g', 'Git')
 keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", {silent=true, desc='Lazygit'})
 keymap("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", {silent=true, desc='Checkout commit'})
 keymap("n", "<leader>gC", "<cmd>Telescope git_bcommits<CR>", {silent = true, desc='Checkout commit for current file'})
@@ -94,7 +100,6 @@ keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.curren
 keymap("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>')
 
 -- DAP
-prefix('d', 'Debugging')
 keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
 keymap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", opts)
 keymap("n", "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", opts)
@@ -104,6 +109,3 @@ keymap("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", opts)
 keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
 keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
 keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
-
--- LSP
-prefix('l', 'LSP')

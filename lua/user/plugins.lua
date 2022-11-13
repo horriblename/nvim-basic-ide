@@ -104,12 +104,7 @@ return packer.startup(function(use)
   use { "ravenxrz/DAPInstall.nvim", commit = "8798b4c36d33723e7bba6ed6e2c202f84bb300de" }
 
   -- Other Plugins (that I added)
-  use { "folke/which-key.nvim",
-    config = function ()
-      require'which-key'.setup {}
-      vim.opt.timeoutlen = 0
-    end
-  }
+  use { "folke/which-key.nvim" }
   use { "simnalamburt/vim-mundo",
     cmd = "Mundo*",
   }
