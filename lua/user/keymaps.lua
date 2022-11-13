@@ -1,5 +1,23 @@
 -- Shorten function name
 local keymap = vim.keymap.set
+local ok, wk = pcall(require, 'which-key')
+
+if ok then
+  wk.setup {}
+  vim.opt.timeoutlen = 0
+
+  -- Prefixes
+  wk.register({
+    mode = { 'n', 'v' },
+    p = { name = 'Packer' },
+    b = { name = 'Buffer' },
+    g = { name = 'Git' },
+    d = { name = 'Debug' },
+    l = { name = 'LSP' }
+  }, {prefix = '<leader>'})
+end
+wk = nil -- just in case I'm dumb enough to call despite maybe not existing
+
 -- Silent keymap option
 local opts = { silent = true }
 
@@ -23,6 +41,15 @@ keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Plugins --
+-- Packer
+keymap('n', '<leader>ps', ':PackerSync<CR>', opts)
+keymap('n', '<leader>pS', ':PackerStatus<CR>', opts)
+keymap('n', '<leader>pu', ':PackerUpdate<CR>', opts)
+keymap('n', '<leader>pc', ':PackerCompile<CR>', opts)
+keymap('n', '<leader>prs', ':PackerSnapshot', {})
+keymap('n', '<leader>prr', ':PackerSnapshotRollback', {})
+keymap('n', '<leader>prd', ':PackerSnapshotDelete', {})
+
 -- Alpha
 keymap('n', '<leader>;', ':Alpha<CR>', opts)
 
