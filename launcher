@@ -1,0 +1,4 @@
+#!/bin/sh
+export NVIDE_CONFIG=~/.config/nvide
+
+exec nvim -u "$NVIDE_CONFIG/init.lua"
