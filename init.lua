@@ -1,3 +1,7 @@
+vim.opt.runtimepath:prepend { '~/.config/nvim' }
+vim.cmd 'call user#general#setup()'
+vim.cmd 'call user#mapping#setup()'
+
 local nvide_config_dir = os.getenv 'NVIDE_CONFIG'
 if nvide_config_dir then
   vim.opt.runtimepath:prepend(nvide_config_dir)
