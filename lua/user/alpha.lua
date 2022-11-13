@@ -45,3 +45,13 @@ dashboard.section.buttons.opts.hl = "Keyword"
 
 dashboard.opts.opts.noautocmd = true
 alpha.setup(dashboard.opts)
+
+if vim.v.vim_did_enter == 0 then 
+  vim.api.nvim_create_autocmd("VimEnter", {
+    pattern = "*",
+    nested = true,
+    callback = function()
+      alpha.start(true)
+    end,
+  })
+end

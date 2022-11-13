@@ -57,15 +57,6 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
 	end,
 })
 
-vim.api.nvim_create_autocmd("VimEnter", {
-  -- group = group_id,
-  pattern = "*",
-  nested = true,
-  callback = function()
-    require('alpha').start(true)
-  end,
-})
-
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 	callback = function()
 	local line_count = vim.api.nvim_buf_line_count(0)
