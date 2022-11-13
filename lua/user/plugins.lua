@@ -1,7 +1,8 @@
 local fn = vim.fn
+local paths = require 'user.nvide-path'
 
 -- Automatically install packer
-local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+local install_path = paths:get_nvide_data_dir() .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
   PACKER_BOOTSTRAP = fn.system {
     "git",
@@ -12,7 +13,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
     install_path,
   }
   print "Installing packer close and reopen Neovim..."
-  vim.cmd [[packadd packer.nvim]]
 end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
@@ -32,6 +32,7 @@ end
 -- Have packer use a popup window
 packer.init {
   compile_path = fn.stdpath 'cache' .. '/packer_compiled.lua',
+  package_root = paths:get_nvide_data_dir() .. "/site/pack",
   display = {
     open_fn = function()
       return require("packer.util").float { border = "rounded" }
@@ -203,8 +204,7 @@ return packer.startup(function(use)
      -- module = "persistence",
      config = function()
        require("persistence").setup {
-         dir = vim.fn.expand(vim.fn.stdpath("state") .. "/sessions/"), -- directory where session files are saved
-         options = { "buffers", "curdir", "tabpages", "winsize" },
+         dir = vim.fn.stdpath("state") .. "/sessions/", -- directory where session files are saved
        }
      end,
    }

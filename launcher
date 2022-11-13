@@ -1,0 +1,5 @@
+#!/bin/sh
+export NVIDE_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/nvide"
+export NVIDE_DATA="${XDG_DATA_HOME:-$HOME/.local/share}/nvide"
+
+exec nvim -u "$NVIDE_CONFIG/init.lua"

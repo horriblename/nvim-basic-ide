@@ -16,15 +16,15 @@ end
 
 local dashboard = require "alpha.themes.dashboard"
 dashboard.section.header.val = {
-  [[                               __                ]],
-  [[  ____    ___    ___   __  __ ╱╲_╲    ___ ____   ]],
-  [[ ╱ _  ╲  ╱ __＼ ╱ __＼╱╲ ╲╱╲ ╲╲╱╲ ╲  ╱ __` __ ╲  ]],
-  [[╱╲ ╲╱╲ ╲╱╲  __╱╱╲ ╲_╲ ╲ ╲ ╲_╱ ▏╲ ╲ ╲╱╲ ╲╱╲ ╲╱╲ ╲ ]],
-  [[╲ ╲_╲ ╲_╲ ╲____╲ ╲____╱╲ ╲___╱  ╲ ╲_╲ ╲_╲ ╲_╲ ╲_╲]],
-  [[ ╲╱_╱╲╱_╱╲╱____╱╲╱___╱  ╲╱__╱    ╲╱_╱╲╱_╱╲╱_╱╲╱_╱]],
+  [[                               ▁▁                ]],
+  [[  ▁▁▁▁    ▁▁▁    ▁▁▁   ▁▁  ▁▁ ╱╲▁╲    ▁▁▁ ▁▁▁▁   ]],
+  [[ ╱ ▁  ╲  ╱ ▁▁＼ ╱ ▁▁＼╱╲ ╲╱╲ ╲╲╱╲ ╲  ╱ ▁▁ˇ ▁▁ ╲  ]],
+  [[╱╲ ╲╱╲ ╲╱╲  ▁▁╱╱╲ ╲▁╲ ╲ ╲ ╲╱  ▏╲ ╲ ╲╱╲ ╲╱╲ ╲╱╲ ╲ ]],
+  [[╲ ╲▁╲ ╲▁╲ ╲▁▁▁▁╲ ╲▁▁▁▁╱╲ ╲▁▁▁╱  ╲ ╲▁╲ ╲▁╲ ╲▁╲ ╲▁╲]],
+  [[ ╲╱▁╱╲╱▁╱╲╱▁▁▁▁╱╲╱▁▁▁╱  ╲╱▁▁╱    ╲╱▁╱╲╱▁╱╲╱▁╱╲╱▁╱]],
 }
 dashboard.section.buttons.val = {
-  dashboard.button("s", lastSessionText(), ":lua require'persistence'.load({last = true})"),
+  dashboard.button("s", lastSessionText(), ":lua require'persistence'.load({last = true})<CR>"),
   dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
   dashboard.button("e", " " .. " New file", ":ene <BAR> startinsert <CR>"),
   dashboard.button("p", " " .. " Find project", ":lua require('telescope').extensions.projects.projects()<CR>"),
@@ -45,3 +45,13 @@ dashboard.section.buttons.opts.hl = "Keyword"
 
 dashboard.opts.opts.noautocmd = true
 alpha.setup(dashboard.opts)
+
+if vim.v.vim_did_enter == 0 then 
+  vim.api.nvim_create_autocmd("VimEnter", {
+    pattern = "*",
+    nested = true,
+    callback = function()
+      alpha.start(true)
+    end,
+  })
+end
