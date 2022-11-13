@@ -30,6 +30,7 @@ end
 
 -- Have packer use a popup window
 packer.init {
+  compile_path = fn.stdpath 'cache' .. '/packer_compiled.lua',
   display = {
     open_fn = function()
       return require("packer.util").float { border = "rounded" }
