@@ -13,6 +13,7 @@ function M:init(config_dir)
 
   local nvide_data_dir = os.getenv 'NVIDE_DATA'
   if nvide_data_dir then
+    vim.opt.packpath:prepend(nvide_data_dir .. '/site')
     vim.opt.packpath:prepend(nvide_data_dir .. '/site/pack/packer')
   else
     nvide_data_dir = vim.fn.stdpath 'data'
