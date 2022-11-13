@@ -1,4 +1,9 @@
-require'tokyonight'.setup {
+local ok, tokyonight = pcall(require, "tokyonight")
+if not ok then
+  return
+end
+
+tokyonight.setup {
   styles = {
     comments = { fg = '#727ca7' }
   },
