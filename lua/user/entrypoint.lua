@@ -1,6 +1,3 @@
--- Turn off autoclose as it conflicts with autopairs
-vim.cmd [[AutoCloseOff]]
-
 require "user.hijack"
 require "user.impatient"
 require "user.options"
