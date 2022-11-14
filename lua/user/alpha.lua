@@ -51,7 +51,9 @@ if vim.v.vim_did_enter == 0 then
     pattern = "*",
     nested = true,
     callback = function()
-      alpha.start(true)
+      if vim.fn.argc() == 0 then
+        alpha.start(true)
+      end
     end,
   })
 end
