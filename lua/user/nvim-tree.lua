@@ -87,6 +87,7 @@ nvim_tree.setup {
       { key = "y", action = dispatcher "copy" },
       { key = "v", action = dispatcher "vsplit" },
       { key = "s", action = dispatcher "split" },
+      { key = "T", action = dispatcher "tabnew" },
       -- { key = "cf", action = dispatcher "copy_name" },
       { key = "cl", action = dispatcher "copy_absolute_path" },
       { key = "gx", action = dispatcher "system_open" },
@@ -94,6 +95,16 @@ nvim_tree.setup {
       { key = "dd", action = dispatcher "trash" },
       { key = "DD", action = dispatcher "remove" },
       { key = "Z", action = ':Z ' },
+
+      { key = 'gh', action = ':cd ~/ <cr>' },
+      { key = 'gd', action = ':cd ~/Documents <cr>' },
+      { key = 'gD', action = ':cd ~/Downloads <cr>' },
+      { key = 'gp', action = ':cd ~/Pictures <cr>' },
+      { key = 'gm', action = ':cd ~/Music <cr>' },
+      { key = 'gs', action = ':cd ~/scripts <cr>' },
+      { key = 'gn', action = ':cd ~/Nextcloud <cr>' },
+      { key = 'gv', action = ':cd ' .. vim.fn.stdpath("config") .. '<cr>' },
+
     }
 
     for _, mapping in ipairs(mappings) do

@@ -18,7 +18,7 @@ local diagnostics = {
 
 local diff = {
   "diff",
-  colored = false,
+  colored = true,
   symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
   cond = hide_in_width,
 }
@@ -36,7 +36,37 @@ local location = {
 }
 
 local spaces = function()
-  return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
+  local space_or_tab = vim.bo.expandtab and '␣' or ' '
+  return space_or_tab .. vim.api.nvim_buf_get_option(0, "shiftwidth")
+end
+
+local treesitter = {
+  function() return '' end,
+  colored = true,
+  color = function()
+    local buf = vim.api.nvim_get_current_buf()
+    local ts = vim.treesitter.highlighter.active[buf]
+    return { fg = ts and 'green' or 'red' }
+	end
+}
+
+local lsp = function()
+  if not hide_in_width() then
+    return ''
+  end
+
+  local lsps = vim.tbl_map(
+    function(client)
+      return client.config.name
+    end,
+    vim.lsp.get_active_clients({ bufnr = vim.fn.bufnr() })
+  )
+  
+  if #lsps == 0 then
+    return '[No LSP]'
+  end
+
+  return '[' .. table.concat(lsps, ',') .. ']'
 end
 
 lualine.setup {
@@ -53,7 +83,7 @@ lualine.setup {
     lualine_a = { filetype, "filename" },
     lualine_b = {"branch"},
     lualine_c = { diagnostics },
-    lualine_x = { diff, spaces, "encoding" },
+    lualine_x = { diff, treesitter, lsp, spaces },
     lualine_y = { location },
     lualine_z = { "progress" },
   },

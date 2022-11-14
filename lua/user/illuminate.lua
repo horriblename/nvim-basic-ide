@@ -13,7 +13,7 @@ illuminate.configure {
     "treesitter",
     "regex",
   },
-  delay = 200,
+  delay = 400,
   filetypes_denylist = {
     "dirvish",
     "fugitive",
@@ -30,7 +30,7 @@ illuminate.configure {
     "TelescopePrompt",
   },
   filetypes_allowlist = {},
-  modes_denylist = {},
+  modes_denylist = { 'v', 'V', 'CTRL-V', 's', 'S', 'CTRL-S', 'i' , 'R' },
   modes_allowlist = {},
   providers_regex_syntax_denylist = {},
   providers_regex_syntax_allowlist = {},

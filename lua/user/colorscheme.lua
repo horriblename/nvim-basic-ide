@@ -1,3 +1,5 @@
+vim.cmd "hi TreesitterContextBottom gui=underline guisp=Grey"
+
 local ok, tokyonight = pcall(require, "tokyonight")
 if not ok then
   return
@@ -7,7 +9,7 @@ tokyonight.setup {
   styles = {
     comments = { fg = '#727ca7' }
   },
-  on_highlights = function (hl, c) 
+  on_highlights = function (hl, _)
     hl.WinSeparator={ fg = '#727ca7' }
   end
 }
