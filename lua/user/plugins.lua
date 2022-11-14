@@ -217,6 +217,91 @@ return packer.startup(function(use)
      end
    }
 
+  -- language specific
+  use { 'ferrine/md-img-paste.vim',
+    ft = "markdown",
+    fn = 'mdip#MarkdownClipboardImage',
+    setup = function()
+      vim.g.mdip_imgdir = 'attachments'
+      vim.g.PasteImageFunction = 'g:WikiPasteImage'
+      vim.cmd [=[
+function! g:WikiPasteImage(relpath)
+	call append('.','![['.a:relpath.']]')
+endfunction
+]=]
+    end,
+  }
+  use { 'jakewvincent/mkdnflow.nvim',
+    -- ft = "markdown",
+    cmd = "Mkdnflow",
+    rocks = 'luautf8',
+    config = function()
+      require('mkdnflow').setup {
+        -- Config goes here; leave blank for defaults
+        links = { conceal = true },
+        perspective = { root_tell = 'index.md' },
+        mappings = {
+          MkdnEnter = { { 'i', 'n', 'v' }, '<CR>' },
+          MkdnNextLink = false,
+          MkdnPrevLink = false,
+          MkdnFollowLink = { { 'n', 'v' }, '<A-CR>' },
+          MkdnDestroyLink = { 'n', 'K' },
+
+          MkdnTableNextRow = false,
+          MkdnTablePrevRow = { 'i', '<M-CR>' },
+          MkdnTableNewRowBelow = { 'n', '<leader>ir' },
+          MkdnTableNewRowAbove = { 'n', '<leader>iR' },
+          MkdnTableNewColAfter = { 'n', '<leader>ic' },
+          MkdnTableNewColBefore = { 'n', '<leader>iC' },
+        }
+      }
+    end
+  }
+  use { "jpalardy/vim-slime",
+    ft = "python",
+  }
+  use { "hanschen/vim-ipython-cell",
+    ft = "python",
+  }
+  use { 'elkowar/yuck.vim',
+    ft = 'yuck',
+  }
+  use { 'gpanders/nvim-parinfer',
+    cmd = { 'ParinferOn', 'ParinferToggle', 'Parinfer*' },
+  }
+  use { 'simrat39/rust-tools.nvim',
+    -- ft = { "rust", "rs" }, -- IMPORTANT: re-enabling this seems to break inlay-hints
+    config = function()
+      require("rust-tools").setup {
+        tools = {
+          executor = require("rust-tools/executors").termopen, -- can be quickfix or termopen
+          hover_actions = {
+            auto_focus = true,
+          },
+        },
+        server = {
+          on_attach = function(_, bufnr)
+            local rt = require "rust-tools"
+            -- Hover actions
+            vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+            -- Code action groups
+            vim.keymap.set("n", "<leader>lA", rt.code_action_group.code_action_group, { buffer = bufnr })
+          end,
+        },
+      }
+    end,
+  }
+  use { 'windwp/nvim-ts-autotag',
+    ft = { 'html', 'javascript', 'typescript', 'javascriptreact',
+      'typescriptreact', 'svelte', 'vue', 'tsx', 'jsx',
+      'rescript', 'xml', 'php',
+      'markdown',
+      'glimmer', 'handlebars', 'hbs',
+    },
+    config = function()
+      require 'nvim-ts-autotag'.setup()
+    end
+  }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
