@@ -13,7 +13,8 @@ if ok then
     b = { name = 'Buffer' },
     g = { name = 'Git' },
     d = { name = 'Debug' },
-    l = { name = 'LSP' }
+    l = { name = 'LSP' },
+    S = { name = 'Session' },
   }, {prefix = '<leader>'})
 end
 wk = nil -- just in case I'm dumb enough to call despite maybe not existing
@@ -52,6 +53,7 @@ keymap('n', '<leader>prd', ':PackerSnapshotDelete', {})
 
 -- Alpha
 keymap('n', '<leader>;', ':Alpha<CR>', opts)
+keymap('n', '<leader>t', ':tabnew | Alpha<CR>', opts)
 
 -- ToggleTerm
 keymap({'n', 'i'}, '<M-x>', '<cmd>ToggleTerm<CR>', opts)
@@ -65,6 +67,17 @@ keymap('n', '<leader>bh', ':BufferLineCloseLeft<CR>', opts)
 keymap('n', '<leader>bl', ':BufferLineCloseRight<CR>', opts)
 keymap('n', '<leader>bD', ':BufferLineSortByDirectory<CR>', opts)
 keymap('n', '<leader>bE', ':BufferLineSortByExtension<CR>', opts)
+
+-- Persistence FIXME
+local p_ok, persistence = pcall(require, 'persistence')
+if p_ok then
+  keymap('n', '<leader>Ss', persistence.save, { silent = true, desc = 'Save session' })
+  keymap('n', '<leader>SQ', persistence.stop, { silent = true, desc = 'Quit without saving session' })
+  keymap('n', '<leader>Sc', persistence.load, { silent = true, desc = 'Restore last session for current dir' })
+  keymap('n', '<leader>Sl', function() persistence.load({ last = true }) end, {
+    silent = true,
+    desc = 'Restore last session'})
+end
 
 -- NvimTree
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
