@@ -161,22 +161,11 @@ return packer.startup(function(use)
     end
    }
 
-   use { 'stevearc/aerial.nvim',
-     event = "BufRead",
-     cmd = 'Aerial*',
-     after = { 'nvim-treesitter' },
-     config = function()
-       require('aerial').setup {}
-       -- Toggle the aerial window with <leader>a
-       vim.api.nvim_set_keymap('n', '<leader>a', '<cmd>AerialToggle!<CR>', {})
-       vim.api.nvim_set_keymap('n', '{', '<cmd>AerialPrev<CR>', {})
-       -- Jump up the tree with '[[' or ']]'
-       vim.api.nvim_set_keymap('n', '}', '<cmd>AerialNext<CR>', {})
-       -- Jump forwards/backwards with '{' and '}'
-       vim.api.nvim_set_keymap('n', '[[', '<cmd>AerialPrevUp<CR>', {})
-       vim.api.nvim_set_keymap('n', ']]', '<cmd>AerialNextUp<CR>', {})
-     end,
-   }
+  use { 'stevearc/aerial.nvim',
+    cmd = 'Aerial*',
+    module = 'aerial',
+    after = { 'nvim-treesitter' },
+  }
 
 	use { "norcalli/nvim-colorizer.lua",
 		event = "BufRead",
