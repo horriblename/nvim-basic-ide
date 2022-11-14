@@ -1,3 +1,4 @@
+vim.g.nvide = true
 require "user.impatient"
 require "user.options"
 require "user.keymaps"
