@@ -1,4 +1,3 @@
-vim.opt.runtimepath:prepend { '~/.config/nvim' }
 vim.cmd 'call user#general#setup()'
 vim.cmd 'call user#mapping#setup()'
 
