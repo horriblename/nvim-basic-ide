@@ -7,7 +7,7 @@ local function lastSessionText()
 	-- for some reason persistence.get_last() can fail
 	local ok, session = pcall(function() require 'persistence'.get_last() end)
 	if not ok or not session then
-		return '碑 Last session'  
+		return '碑 Last session'
 	end
 
   local path = require 'user.util'.persistence_loc(session)
@@ -46,7 +46,7 @@ dashboard.section.buttons.opts.hl = "Keyword"
 dashboard.opts.opts.noautocmd = true
 alpha.setup(dashboard.opts)
 
-if vim.v.vim_did_enter == 0 then 
+if vim.v.vim_did_enter == 0 then
   vim.api.nvim_create_autocmd("VimEnter", {
     pattern = "*",
     nested = true,
