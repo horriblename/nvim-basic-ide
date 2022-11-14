@@ -10,8 +10,8 @@ local function lastSessionText()
 		return '碑 Last session'  
 	end
 
-  local path = vim.fn.fnamemodify(session, ':t:r:gs|%|/|:~')
-  return '碑 Last session: ' .. vim.fn.pathshorten(path)
+  local path = require 'user.util'.persistence_loc(session)
+  return '碑 Last session - ' .. vim.fn.pathshorten(path)
 end
 
 local dashboard = require "alpha.themes.dashboard"
