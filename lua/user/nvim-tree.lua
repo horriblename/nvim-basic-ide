@@ -105,6 +105,28 @@ nvim_tree.setup {
       { key = 'gn', action = ':cd ~/Nextcloud <cr>' },
       { key = 'gv', action = ':cd ' .. vim.fn.stdpath("config") .. '<cr>' },
 
+      { key = 'gj', action = '<cmd>cd ~/Jail <cr>' },
+      { key = 'gr', action = '<cmd>cd ~/repo <cr>' },
+      { key = 'gc', action = '<cmd>cd ~/.config <cr>' },
+      { key = 'gC', action = '<cmd>cd ~/.cache <cr>' },
+      { key = 'gl', action = '<cmd>cd ~/.local <cr>' },
+
+      { key = 'g/', action = '<cmd>cd $PREFIX/ <cr>' },
+      { key = 'gE', action = '<cmd>cd $PREFIX/etc <cr>' },
+      { key = 'gUU', action = '<cmd>cd $PREFIX/usr <cr>' },
+      { key = 'gUs', action = '<cmd>cd $PREFIX/usr/share <cr>' },
+      { key = 'gT', action = '<cmd>cd $PREFIX/tmp <cr>' },
+      { key = 'gM', action = '<cmd>cd $PREFIX/mnt <cr>' },
+      { key = 'gV', action = '<cmd>cd $PREFIX/var <cr>' },
+
+      { key = 'gbb', action = '<cmd>cd /mnt/BUP <cr>' },
+      { key = 'gbd', action = '<cmd>cd /mnt/BUP/Documents_ <cr>' },
+      { key = 'gba', action = '<cmd>cd /mnt/BUP/apps <cr>' },
+
+      { key = 'gtt', action = '<cmd>cd /mnt/ntdrive <cr>' },
+      { key = 'gta', action = '<cmd>cd /mnt/ntdrive/apps <cr>' },
+
+      { key = 'gee', action = '<cmd>cd /mnt/ext <cr>' },
     }
 
     for _, mapping in ipairs(mappings) do

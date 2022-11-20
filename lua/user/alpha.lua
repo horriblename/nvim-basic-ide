@@ -5,7 +5,7 @@ end
 
 local function lastSessionText()
 	-- for some reason persistence.get_last() can fail
-	local ok, session = pcall(function() require 'persistence'.get_last() end)
+	local ok, session = pcall(require 'persistence'.get_last)
 	if not ok or not session then
 		return '碑 Last session'
 	end
@@ -24,7 +24,7 @@ dashboard.section.header.val = {
   [[ ╲╱▁╱╲╱▁╱╲╱▁▁▁▁╱╲╱▁▁▁╱  ╲╱▁▁╱    ╲╱▁╱╲╱▁╱╲╱▁╱╲╱▁╱]],
 }
 dashboard.section.buttons.val = {
-  dashboard.button("s", lastSessionText(), ":lua require'persistence'.load({last = true})<CR>"),
+  dashboard.button("S", lastSessionText(), ":lua require'persistence'.load({last = true})<CR>"),
   dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
   dashboard.button("e", " " .. " New file", ":ene <BAR> startinsert <CR>"),
   dashboard.button("p", " " .. " Find project", ":lua require('telescope').extensions.projects.projects()<CR>"),
