@@ -14,6 +14,7 @@ if ok then
 		g = { name = "Git" },
 		d = { name = "Debug" },
 		l = { name = "LSP" },
+		s = { name = "Telescope" },
 		S = { name = "Session" },
 	}, { prefix = "<leader>" })
 end
@@ -64,6 +65,7 @@ keymap({ "n", "i" }, "<M-p>", "<cmd>BufferLineCyclePrev<CR>", opts)
 keymap("n", "<leader>c", ":Bdelete<CR>", opts)
 keymap("n", "<leader>C", ":Bdelete!<CR>", opts)
 keymap("n", "<leader>bp", ":BufferLinePick<CR>", opts)
+keymap("n", "<leader>bs", ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>bh", ":BufferLineCloseLeft<CR>", opts)
 keymap("n", "<leader>bl", ":BufferLineCloseRight<CR>", opts)
 keymap("n", "<leader>bD", ":BufferLineSortByDirectory<CR>", opts)
@@ -87,11 +89,16 @@ end
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
 -- Telescope
+keymap("n", "<M-d>", ":Telescope resume<CR>", opts)
 keymap("n", "<leader>f", ":Telescope find_files<CR>", opts)
 keymap("n", "<leader>sf", ":Telescope find_files<CR>", opts)
+keymap("n", "<leader>sr", ":Telescope oldfiles<CR>", opts)
 keymap("n", "<leader>st", ":Telescope live_grep<CR>", opts)
 keymap("n", "<leader>sp", ":Telescope projects<CR>", opts)
 keymap("n", "<leader>sb", ":Telescope buffers<CR>", opts)
+keymap("n", "<leader>sq", ":Telescope quickfix<CR>", opts)
+keymap("n", "<leader>sQ", ":Telescope quickfix_history<CR>", opts)
+keymap("n", "<leader>sH", ":Telescope help_tags<CR>", opts)
 
 -- Git
 keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { silent = true, desc = "Lazygit" })
@@ -124,6 +131,7 @@ keymap("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle.linewise(v
 -- DAP
 keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
 keymap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", opts)
+keymap("n", "<leader>dC", "<cmd>lua require'dap'.run_to_cursor()<cr>", opts)
 keymap("n", "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", opts)
 keymap("n", "<leader>do", "<cmd>lua require'dap'.step_over()<cr>", opts)
 keymap("n", "<leader>dO", "<cmd>lua require'dap'.step_out()<cr>", opts)
@@ -137,3 +145,8 @@ keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
 keymap("n", "<leader>a", "<cmd>AerialToggle!<CR>", {})
 keymap("n", "[m", "<cmd>AerialPrev<CR>", {})
 keymap("n", "]m", "<cmd>AerialNext<CR>", {})
+
+-- LSP
+keymap("n", "<leader>li", "<cmd>LspInfo<cr>", opts)
+keymap("n", "<leader>lI", "<cmd>LspInstallInfo<cr>", opts)
+keymap("n", "<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", opts)
