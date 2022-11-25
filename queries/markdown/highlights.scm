@@ -6,11 +6,27 @@
 (atx_h5_marker) @Header5
 (atx_h6_marker) @Header6
 
+(fenced_code_block
+  . (fenced_code_block_delimiter) @tag
+  (#set! conceal ""))
+
+(fenced_code_block
+  (info_string) @tag.attribute )
+
+(fenced_code_block
+  ((fenced_code_block_delimiter)
+   @tag
+   (#set! conceal "⎯"))
+  .)
+
 ;; testing
-; (block_quote 
-;   (block_quote_marker) @conceal
-;   [
-; 	(_ (block_continuation) @conceal)
-; 	(block_continuation) @conceal 
-; 	]* 
-;   (#set! conceal "▏"))
+;     (block_quote_marker) @conceal @marker
+;     (#set! conceal "▏"))
+;
+; (block_quote
+;     (block_continuation) @conceal @cont
+;     (#set! conceal "▏"))
+;
+; (block_quote
+;      (_ (block_continuation) @conceal @nestcont (#set! conceal "▏"))
+; )
