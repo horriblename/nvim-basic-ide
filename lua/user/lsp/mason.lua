@@ -1,12 +1,18 @@
 local servers = {
-	"sumneko_lua",
-	"cssls",
-	"html",
-	"tsserver",
-	"pyright",
-	"bashls",
-	"jsonls",
-	"yamlls",
+  "sumneko_lua",
+  "cssls",
+  "html",
+  "tsserver",
+  "pyright",
+  "bashls",
+  "jsonls",
+  "yamlls",
+  "marksman",
+}
+
+local lazy_servers = {
+  "clangd",
+  "taplo",
 }
 
 local settings = {
