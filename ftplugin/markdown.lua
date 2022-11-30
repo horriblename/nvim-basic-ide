@@ -1,17 +1,17 @@
 vim.wo.colorcolumn = nil
-vim.bo.shiftwidth = 4
 vim.bo.tabstop = 4
-vim.bo.softtabstop = 4
+vim.bo.shiftwidth = 3
+-- vim.bo.softtabstop = 4
 vim.bo.expandtab = true
 
--- this links to tokyonight's highlight definitions for the "p00f/nvim-ts-rainbow" plugin
+-- this links to tokyonight's highlight definitions for lualine
 vim.cmd([[ 
-hi! link @Header1 rainbowcol1
-hi! link @Header2 rainbowcol2
-hi! link @Header3 rainbowcol3
-hi! link @Header4 rainbowcol4
-hi! link @Header5 rainbowcol5
-hi! link @Header6 rainbowcol6
+hi! link @Header1 lualine_a_replace
+hi! link @Header2 lualine_a_command
+hi! link @Header3 lualine_a_insert
+hi! link @Header4 lualine_a_visual
+hi! link @Header5 lualine_a_normal
+hi! link @Header6 lualine_b_normal
 
 hi @text.emphasis guifg=#e0af68 gui=italic  " rainbowcol2
 hi @text.strong guifg=#9ece6a gui=bold  " rainbowcol3
