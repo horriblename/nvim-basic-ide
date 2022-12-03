@@ -11,11 +11,11 @@
   (#set! conceal ""))
 
 (fenced_code_block
-  (info_string) @tag.attribute )
+  (info_string) @devicon
+  (#as_devicon! @devicon))
 
 (fenced_code_block
-  ((fenced_code_block_delimiter)
-   @tag
+  ((fenced_code_block_delimiter) @tag
    (#set! conceal "⎯"))
   .)
 
