@@ -13,17 +13,8 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 })
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  group = user_augroup,
-	pattern = { "gitcommit"},
-	callback = function()
-		vim.opt_local.wrap = true
-		vim.opt_local.spell = true
-	end,
-})
-
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  group = user_augroup,
-	pattern = { "markdown" },
+	group = user_augroup,
+	pattern = { "gitcommit", "markdown" },
 	callback = function()
 		vim.opt_local.wrap = true
 		vim.opt_local.spell = true
