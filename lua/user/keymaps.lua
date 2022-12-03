@@ -3,20 +3,20 @@ local keymap = vim.keymap.set
 local ok, wk = pcall(require, "which-key")
 
 if ok then
-	wk.setup({})
-	vim.opt.timeoutlen = 0
+  wk.setup({})
+  vim.opt.timeoutlen = 0
 
-	-- Prefixes
-	wk.register({
-		mode = { "n", "v" },
-		p = { name = "Packer" },
-		b = { name = "Buffer" },
-		g = { name = "Git" },
-		d = { name = "Debug" },
-		l = { name = "LSP" },
-		s = { name = "Telescope" },
-		S = { name = "Session" },
-	}, { prefix = "<leader>" })
+  -- Prefixes
+  wk.register({
+    mode = { "n", "v" },
+    p = { name = "Packer" },
+    b = { name = "Buffer" },
+    g = { name = "Git" },
+    d = { name = "Debug" },
+    l = { name = "LSP" },
+    s = { name = "Telescope" },
+    S = { name = "Session" },
+  }, { prefix = "<leader>" })
 end
 wk = nil -- just in case I'm dumb enough to call despite maybe not existing
 
@@ -70,19 +70,20 @@ keymap("n", "<leader>bh", ":BufferLineCloseLeft<CR>", opts)
 keymap("n", "<leader>bl", ":BufferLineCloseRight<CR>", opts)
 keymap("n", "<leader>bD", ":BufferLineSortByDirectory<CR>", opts)
 keymap("n", "<leader>bE", ":BufferLineSortByExtension<CR>", opts)
+keymap("n", "<leader>bp", ":BufferLineTogglePin<CR>", opts)
 
 -- Persistence FIXME
 local p_ok, persistence = pcall(require, "persistence")
 if p_ok then
-	keymap("n", "<leader>Ss", persistence.save, { silent = true, desc = "Save session" })
-	keymap("n", "<leader>SQ", persistence.stop, { silent = true, desc = "Quit without saving session" })
-	keymap("n", "<leader>Sc", persistence.load, { silent = true, desc = "Restore last session for current dir" })
-	keymap("n", "<leader>Sl", function()
-		persistence.load({ last = true })
-	end, {
-		silent = true,
-		desc = "Restore last session",
-	})
+  keymap("n", "<leader>Ss", persistence.save, { silent = true, desc = "Save session" })
+  keymap("n", "<leader>SQ", persistence.stop, { silent = true, desc = "Quit without saving session" })
+  keymap("n", "<leader>Sc", persistence.load, { silent = true, desc = "Restore last session for current dir" })
+  keymap("n", "<leader>Sl", function()
+    persistence.load({ last = true })
+  end, {
+    silent = true,
+    desc = "Restore last session",
+  })
 end
 
 -- NvimTree
@@ -104,10 +105,10 @@ keymap("n", "<leader>sH", ":Telescope help_tags<CR>", opts)
 keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { silent = true, desc = "Lazygit" })
 keymap("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { silent = true, desc = "Checkout commit" })
 keymap(
-	"n",
-	"<leader>gC",
-	"<cmd>Telescope git_bcommits<CR>",
-	{ silent = true, desc = "Checkout commit for current file" }
+  "n",
+  "<leader>gC",
+  "<cmd>Telescope git_bcommits<CR>",
+  { silent = true, desc = "Checkout commit for current file" }
 )
 keymap("n", "<leader>gb", "<cmd>Telescope git_branches<CR>", { silent = true, desc = "Checkout branch" })
 keymap("n", "<leader>go", "<cmd>Telescope git_status<CR>", { silent = true, desc = "Open changed file" })
@@ -143,8 +144,8 @@ keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
 -- Aerial
 -- Toggle the aerial window with <leader>a
 keymap("n", "<leader>a", "<cmd>AerialToggle!<CR>", {})
-keymap("n", "[m", "<cmd>AerialPrev<CR>", {})
-keymap("n", "]m", "<cmd>AerialNext<CR>", {})
+keymap({"n", "v"}, "[m", "<cmd>AerialPrev<CR>", {})
+keymap({"n", "v"}, "]m", "<cmd>AerialNext<CR>", {})
 
 -- LSP
 keymap("n", "<leader>li", "<cmd>LspInfo<cr>", opts)
