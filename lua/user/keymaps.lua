@@ -64,7 +64,7 @@ keymap({ "n", "i" }, "<M-n>", "<cmd>BufferLineCycleNext<CR>", opts)
 keymap({ "n", "i" }, "<M-p>", "<cmd>BufferLineCyclePrev<CR>", opts)
 keymap("n", "<leader>c", ":Bdelete<CR>", opts)
 keymap("n", "<leader>C", ":Bdelete!<CR>", opts)
-keymap("n", "<leader>bp", ":BufferLinePick<CR>", opts)
+keymap("n", "<leader>bt", ":BufferLinePick<CR>", opts)
 keymap("n", "<leader>bs", ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>bh", ":BufferLineCloseLeft<CR>", opts)
 keymap("n", "<leader>bl", ":BufferLineCloseRight<CR>", opts)
@@ -144,8 +144,8 @@ keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
 -- Aerial
 -- Toggle the aerial window with <leader>a
 keymap("n", "<leader>a", "<cmd>AerialToggle!<CR>", {})
-keymap({"n", "v"}, "[m", "<cmd>AerialPrev<CR>", {})
-keymap({"n", "v"}, "]m", "<cmd>AerialNext<CR>", {})
+keymap({ "n", "v" }, "[m", "<cmd>AerialPrev<CR>", {})
+keymap({ "n", "v" }, "]m", "<cmd>AerialNext<CR>", {})
 
 -- LSP
 keymap("n", "<leader>li", "<cmd>LspInfo<cr>", opts)
