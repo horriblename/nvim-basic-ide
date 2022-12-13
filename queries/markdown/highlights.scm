@@ -16,7 +16,7 @@
 
 (fenced_code_block
   ((fenced_code_block_delimiter) @tag
-   (#set! conceal "⎯"))
+   (#set! conceal "錄"))
   .)
 
 ;; testing

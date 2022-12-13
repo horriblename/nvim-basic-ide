@@ -1,1 +1,2 @@
-vim.cmd 'setlocal shiftwidth=3'
+vim.bo.tabstop = 3
+vim.bo.shiftwidth = 3

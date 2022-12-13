@@ -18,9 +18,11 @@ telescope.setup({
 				["<Down>"] = actions.cycle_history_next,
 				["<Up>"] = actions.cycle_history_prev,
 				["<M-d>"] = actions.close,
+				["<C-BS>"] = { "<C-S-w>", type = "command" },
 			},
 			n = {
 				["<M-d>"] = actions.close,
+				["<C-s>"] = actions.select_horizontal,
 			},
 		},
 	},

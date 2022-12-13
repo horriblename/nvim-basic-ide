@@ -4,6 +4,12 @@ if not status_ok then
 	return
 end
 
+-- Remove some scuffed autoclose bindings
+-- iterate over each char
+local _ = ([[{}()[]'"`]]):gsub('.', function (c)
+  vim.keymap.del('i', c)
+end)
+
 npairs.setup({
 	check_ts = true, -- treesitter integration
 	disable_filetype = { "TelescopePrompt" },

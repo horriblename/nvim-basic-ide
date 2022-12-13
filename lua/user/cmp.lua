@@ -62,6 +62,7 @@ cmp.setup({
 		}),
 		-- Accept currently selected item. If none selected, `select` first item.
 		-- Set `select` to `false` to only confirm explicitly selected items.
+		["<C-y>"] = cmp.mapping.confirm({ select = true }),
 		["<CR>"] = nil,
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if luasnip.expandable() then
