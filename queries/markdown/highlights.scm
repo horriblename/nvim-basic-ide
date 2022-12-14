@@ -19,6 +19,57 @@
    (#set! conceal "錄"))
   .)
 
+;; quote blocks 
+;; warning: enabling will consume the whitespace after each quote block marker ('>')
+; (
+;  (block_continuation) @text.reference
+;  (#lua-match? @text.reference "^>")
+;  (#set! conceal "▌"))
+;
+; (
+;  (block_quote_marker) @text.reference
+;  (#set! conceal "▊"))
+
+;; call-out blocks/admonition
+;; https://help.obsidian.md/How+to/Use+callouts
+;; https://learn.microsoft.com/en-us/contribute/markdown-reference#alerts-note-tip-important-caution-warning
+(
+ (block_quote_marker) @text.note
+ (paragraph
+	(inline) @tag)
+	(#eq? @tag "[!NOTE]"))
+
+(
+ (block_quote_marker) @text.warning
+ (paragraph
+	(inline) @tag)
+	(#eq? @tag "[!WARNING]"))
+
+;; table
+(
+ (pipe_table_header
+	"|" @pipe
+	(#set! conceal "│")
+	))
+
+(
+ (pipe_table_delimiter_row
+	"|" @pipe
+	(#set! conceal "│")
+	))
+
+(
+ (pipe_table_row
+	"|" @pipe
+	(#set! conceal "│")
+	))
+
+; (
+;  (pipe_table_row
+; 	. "|" @pipe1 (#set! conceal " ")
+; 	"|" @pipe2 . (#set! conceal " ")
+; 	))
+
 ;; testing
 ;     (block_quote_marker) @conceal @marker
 ;     (#set! conceal "▏"))
