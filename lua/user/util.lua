@@ -22,4 +22,13 @@ function M.get_HUD_filetypes()
   }
 end
 
+function M.get_lisp_filetypes()
+  return {
+    "scheme",
+    "query",
+    "yuck",
+    "fennel",
+  }
+end
+
 return M
