@@ -6,6 +6,7 @@
 (atx_h5_marker) @Header5
 (atx_h6_marker) @Header6
 
+;; code blocks
 (fenced_code_block
   . (fenced_code_block_delimiter) @tag
   (#set! conceal ""))
@@ -21,29 +22,33 @@
 
 ;; quote blocks 
 ;; warning: enabling will consume the whitespace after each quote block marker ('>')
-; (
+; ((
 ;  (block_continuation) @text.reference
 ;  (#lua-match? @text.reference "^>")
-;  (#set! conceal "▌"))
+;  (#sub! @text.reference 0 0 0 1)
+; )
+;  (#set! conceal "▌")
+; )
+;
 ;
 ; (
 ;  (block_quote_marker) @text.reference
-;  (#set! conceal "▊"))
+;  (#set! conceal "▌"))
 
 ;; call-out blocks/admonition
 ;; https://help.obsidian.md/How+to/Use+callouts
 ;; https://learn.microsoft.com/en-us/contribute/markdown-reference#alerts-note-tip-important-caution-warning
 (
- (block_quote_marker) @text.note
- (paragraph
-	(inline) @tag)
-	(#eq? @tag "[!NOTE]"))
+(block_quote_marker) @text.note
+(paragraph
+(inline) @tag)
+(#eq? @tag "[!NOTE]"))
 
 (
- (block_quote_marker) @text.warning
- (paragraph
-	(inline) @tag)
-	(#eq? @tag "[!WARNING]"))
+(block_quote_marker) @text.warning
+(paragraph
+(inline) @tag)
+(#eq? @tag "[!WARNING]"))
 
 ;; table
 (
@@ -81,3 +86,6 @@
 ; (block_quote
 ;      (_ (block_continuation) @conceal @nestcont (#set! conceal "▏"))
 ; )
+
+;; tag
+; ("#")

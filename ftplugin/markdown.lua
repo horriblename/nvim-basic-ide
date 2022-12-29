@@ -1,4 +1,4 @@
-vim.wo.colorcolumn = nil
+vim.wo.colorcolumn = "100"
 vim.bo.shiftwidth = 3 -- (auto)indent size
 vim.bo.tabstop = 4 -- literal tab size
 -- vim.bo.softtabstop = 4
