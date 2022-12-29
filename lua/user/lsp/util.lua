@@ -19,8 +19,8 @@ function M.peek_definition()
         row = -1,
         col = 1,
         anchor = "SW",
-        width = 50,
-        height = 10,
+        width = 70,
+        height = 15,
         border = "rounded",
       })
 
