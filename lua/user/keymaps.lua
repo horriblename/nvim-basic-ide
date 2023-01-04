@@ -62,7 +62,7 @@ keymap("n", "<leader>;", ":Alpha<CR>", opts)
 keymap("n", "<leader>t", ":tabnew +Alpha %<CR>", opts)
 
 -- ToggleTerm
-keymap({ "n", "i" }, "<M-x>", "<cmd>ToggleTerm<CR>", opts)
+-- keymap({ "n", "i" }, "<M-x>", "<cmd>ToggleTerm<CR>", opts)
 
 -- BufferLine/buffer control
 keymap({ "n", "i" }, "<M-n>", "<cmd>BufferLineCycleNext<CR>", opts)

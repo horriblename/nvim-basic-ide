@@ -11,7 +11,7 @@ _G.Terminals = {}
 
 toggleterm.setup({
 	size = 20,
-	-- open_mapping = [[<M-x>]],
+	open_mapping = [[<M-x>]],
 	hide_numbers = true,
 	shade_terminals = true,
 	shading_factor = 2,
@@ -87,12 +87,12 @@ function _G.TermBar()
 	return "%= %#Directory#" .. cwd .. " %#WinBar#" .. curr .. "/" .. #terms
 end
 
-local opts = { noremap = true }
-vim.keymap.set("t", "<M-x>", [[<C-\><C-n>:ToggleTerm<CR>]], opts)
-vim.keymap.set("t", "<M-n>", next_toggleterm, opts)
-vim.keymap.set("t", "<M-p>", function()
-	next_toggleterm(true)
-end, opts)
+-- local opts = { noremap = true }
+-- vim.keymap.set("t", "<M-x>", [[<C-\><C-n>:ToggleTerm<CR>]], opts)
+-- vim.keymap.set("t", "<M-n>", next_toggleterm, opts)
+-- vim.keymap.set("t", "<M-p>", function()
+-- 	next_toggleterm(true)
+-- end, opts)
 
 vim.cmd("autocmd! TermOpen term://*#toggleterm#* setl winbar=%!v:lua._G.TermBar()")
 
