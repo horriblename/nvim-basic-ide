@@ -4,20 +4,21 @@ local servers = {
 	"html",
 	"tsserver",
 	"pyright",
-	"bashls",
 	"jsonls",
 	"yamlls",
 	"marksman",
+	"rnix",
 }
 
 local lazy_servers = {
+	"bashls",
 	"clangd",
+	"csharp_ls",
+	"cssls",
+	"gopls",
+	"hls",
 	"taplo",
 	"vimls",
-	"csharp_ls",
-	"gopls",
-	"cssls",
-	"hls",
 }
 
 local settings = {
@@ -45,9 +46,8 @@ if not lspconfig_status_ok then
 end
 
 local opts = {}
-vim.list_extend(servers, lazy_servers)
 
-for _, server in pairs(servers) do
+local function lspconfig_setup(server)
 	opts = {
 		on_attach = require("user.lsp.handlers").on_attach,
 		capabilities = require("user.lsp.handlers").capabilities,
@@ -61,4 +61,22 @@ for _, server in pairs(servers) do
 	end
 
 	lspconfig[server].setup(opts)
+end
+
+for _, server in pairs(servers) do
+	lspconfig_setup(server)
+end
+
+local lazy_augroup = vim.api.nvim_create_augroup("LazyLspSetup", { clear = false })
+
+for _, server in pairs(lazy_servers) do
+	local filetypes = lspconfig[server].document_config.default_config.filetypes
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = filetypes,
+		group = lazy_augroup,
+		once = true,
+		callback = function()
+			lspconfig_setup(server)
+		end,
+	})
 end
