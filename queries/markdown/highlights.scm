@@ -7,6 +7,12 @@
 (atx_h6_marker) @Header6
 
 ;; code blocks
+
+; kind of a hack: idk how to correctly match closing fences
+(fenced_code_block
+  ((fenced_code_block_delimiter) @tag
+   (#set! conceal "錄")))
+
 (fenced_code_block
   . (fenced_code_block_delimiter) @tag
   (#set! conceal ""))
@@ -14,11 +20,6 @@
 (fenced_code_block
   (info_string) @devicon
   (#as_devicon! @devicon))
-
-(fenced_code_block
-  ((fenced_code_block_delimiter) @tag
-   (#set! conceal "錄"))
-  .)
 
 ;; quote blocks 
 ;; warning: enabling will consume the whitespace after each quote block marker ('>')
