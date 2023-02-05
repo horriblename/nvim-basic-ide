@@ -17,7 +17,7 @@ toggleterm.setup({
 	shading_factor = 2,
 	start_in_insert = true,
 	insert_mappings = true,
-	direction = "float",
+	direction = "tab",
 	float_opts = {
 		border = "curved",
 	},
