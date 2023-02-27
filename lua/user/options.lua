@@ -28,6 +28,7 @@ vim.opt.fillchars.eob=" "                       -- show empty lines at the end o
 vim.opt.whichwrap:append("<,>,[,]")         		-- allow left/right arrow keys to move to the previous/next line when the beginning/end of line is reached
 vim.opt.iskeyword:append("-")                   -- treats words with `-` as single words
 vim.opt.formatoptions:remove({ "c", "r", "o" }) -- This is a sequence of letters which describes how automatic formatting is to be done
+vim.opt.autoread = true
 vim.opt.linebreak = true
 
 vim.g.autoformatting = true
