@@ -152,7 +152,7 @@ keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
 
 -- Aerial
 -- Toggle the aerial window with <leader>a
-keymap("n", "<leader>a", "<cmd>AerialToggle!<CR>", {})
+keymap("n", "gO", "<cmd>AerialToggle<CR>", {})
 keymap({ "n", "v" }, "[m", "<cmd>AerialPrev<CR>", {})
 keymap({ "n", "v" }, "]m", "<cmd>AerialNext<CR>", {})
 
