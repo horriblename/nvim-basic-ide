@@ -27,7 +27,6 @@ vim.opt.rtp:prepend(clone_path)
 -- return packer.startup(function(use)
 local plugins = {
 	-- My plugins here
-	{ "wbthomason/packer.nvim", commit = "6afb67460283f0e990d35d229fd38fdc04063e0a" }, -- Have packer manage itself
 	{ "nvim-lua/plenary.nvim", commit = "4b7e52044bbb84242158d977a50c4cbcd85070c7" }, -- Useful lua functions d by lots of plugins
 	{ "windwp/nvim-autopairs", commit = "4fc96c8f3df89b6d23e5092d31c866c53a346347" }, -- Autopairs, integrates with both cmp and treesitter
 	{ "numToStr/Comment.nvim", commit = "97a188a98b5a3a6f9b1b850799ac078faa17ab67" },
@@ -90,6 +89,7 @@ local plugins = {
 
 	-- Other Plugins (that I added)
 	{ "folke/which-key.nvim", lazy = false },
+	{ "gpanders/editorconfig.nvim", event = "BufRead" },
 	{ "simnalamburt/vim-mundo", cmd = "MundoToggle" },
 	{ "mattn/libcallex-vim", run = { "make -C autoload" } },
 	{
@@ -220,7 +220,7 @@ local plugins = {
 		"ferrine/md-img-paste.vim",
 		ft = "markdown",
 		-- fn = "mdip#MarkdownClipboardImage", -- FIXME fn not available in lazy.nvim
-		init = function()
+		config = function()
 			vim.g.mdip_imgdir = "attachments"
 			vim.g.PasteImageFunction = "g:WikiPasteImage"
 			vim.cmd([=[
