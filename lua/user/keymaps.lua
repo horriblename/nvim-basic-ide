@@ -1,33 +1,5 @@
 -- Shorten function name
 local keymap = vim.keymap.set
-do -- delete whichkey related vars in case I'm dumb enough to use them when they don't exist
-  local ok, wk = pcall(require, "which-key")
-
-  if not ok then
-    require 'user.health':warn('Failed to require which-key')
-  else
-    wk.setup({
-      registers = true,
-      operators = {
-        ds = "De-surround",
-      },
-    })
-    vim.opt.timeoutlen = 0
-
-    -- Prefixes
-    wk.register({
-      mode = { "n", "v" },
-      p = { name = "Packer" },
-      b = { name = "Buffer" },
-      g = { name = "Git" },
-      d = { name = "Debug" },
-      l = { name = "LSP" },
-      s = { name = "Telescope" },
-      S = { name = "Session" },
-    }, { prefix = "<leader>" })
-  end
-end
-
 -- Silent keymap option
 local opts = { silent = true }
 

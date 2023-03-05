@@ -76,15 +76,45 @@ local plugins = {
   },
 
   -- Git
-  { "lewis6991/gitsigns.nvim",    commit = "f98c85e7c3d65a51f45863a34feb4849c82f240f" },
+  { "lewis6991/gitsigns.nvim",  commit = "f98c85e7c3d65a51f45863a34feb4849c82f240f" },
 
   -- DAP
-  { "mfussenegger/nvim-dap",      commit = "6b12294a57001d994022df8acbe2ef7327d30587" },
-  { "rcarriga/nvim-dap-ui",       commit = "1cd4764221c91686dcf4d6b62d7a7b2d112e0b13" },
-  { "ravenxrz/DAPInstall.nvim",   commit = "8798b4c36d33723e7bba6ed6e2c202f84bb300de" },
+  { "mfussenegger/nvim-dap",    commit = "6b12294a57001d994022df8acbe2ef7327d30587" },
+  { "rcarriga/nvim-dap-ui",     commit = "1cd4764221c91686dcf4d6b62d7a7b2d112e0b13" },
+  { "ravenxrz/DAPInstall.nvim", commit = "8798b4c36d33723e7bba6ed6e2c202f84bb300de" },
 
   -- Other Plugins
-  { "folke/which-key.nvim",       lazy = false },
+  {
+    "folke/which-key.nvim",
+    lazy = false,
+    config = function()
+      local wk = require 'which-key'
+
+      wk.setup({
+        registers = true,
+        operators = {
+          ds = "De-surround",
+        },
+      })
+      vim.opt.timeoutlen = 0
+
+      -- Prefixes
+      wk.register({
+          mode = { "n", "v" },
+          p = { name = "Packer" },
+          b = { name = "Buffer" },
+          g = { name = "Git" },
+          d = { name = "Debug" },
+          l = { name = "LSP" },
+          s = { name = "Telescope" },
+          S = { name = "Session" },
+        },
+        {
+          prefix = "<leader>",
+        }
+      )
+    end
+  },
   { "gpanders/editorconfig.nvim", event = "BufRead" },
   { "simnalamburt/vim-mundo",     cmd = "MundoToggle" },
   { "mattn/libcallex-vim",        run = { "make -C autoload" } },
