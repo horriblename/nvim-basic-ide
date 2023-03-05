@@ -1,10 +1,12 @@
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
+  require("user.health"):warn('could not load lua module "cmp"')
   return
 end
 
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
+  require("user.health"):warn('could not load lua module "luasnip"')
   return
 end
 
@@ -49,7 +51,6 @@ cmp.setup({
       luasnip.lsp_expand(args.body) -- For `luasnip` users.
     end,
   },
-
   mapping = cmp.mapping.preset.insert({
     ["<C-k>"] = cmp.mapping.select_prev_item(),
     ["<C-j>"] = cmp.mapping.select_next_item(),
@@ -96,13 +97,13 @@ cmp.setup({
     format = function(entry, vim_item)
       vim_item.kind = kind_icons[vim_item.kind]
       vim_item.menu = ({
-        nvim_lsp = "",
-        nvim_lua = "",
-        luasnip = "",
-        buffer = "",
-        path = "",
-        emoji = "",
-      })[entry.source.name]
+            nvim_lsp = "",
+            nvim_lua = "",
+            luasnip = "",
+            buffer = "",
+            path = "",
+            emoji = "",
+          })[entry.source.name]
       return vim_item
     end,
   },

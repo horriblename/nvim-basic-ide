@@ -20,8 +20,10 @@ end
 ---@param config_dir any
 function M:init(config_dir)
   local nvide_config_dir = config_dir or vim.fn.stdpath("config")
+  require 'user.health':info("nvide config dir is " .. nvide_config_dir)
 
   local nvide_data_dir = os.getenv("NVIDE_DATA") or vim.g.nvide_data_dir
+  require 'user.health':info("nvide data dir is " .. nvide_data_dir)
   if nvide_data_dir then
     -- vim.opt.packpath:prepend(nvide_data_dir .. '/site')
   else

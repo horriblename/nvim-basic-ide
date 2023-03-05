@@ -1,29 +1,32 @@
 -- Shorten function name
 local keymap = vim.keymap.set
-local ok, wk = pcall(require, "which-key")
+do -- delete whichkey related vars in case I'm dumb enough to use them when they don't exist
+  local ok, wk = pcall(require, "which-key")
 
-if ok then
-  wk.setup({
-    registers = true,
-    operators = {
-      ds = "De-surround",
-    },
-  })
-  vim.opt.timeoutlen = 0
+  if not ok then
+    require 'user.health':warn('Failed to require which-key')
+  else
+    wk.setup({
+      registers = true,
+      operators = {
+        ds = "De-surround",
+      },
+    })
+    vim.opt.timeoutlen = 0
 
-  -- Prefixes
-  wk.register({
-    mode = { "n", "v" },
-    p = { name = "Packer" },
-    b = { name = "Buffer" },
-    g = { name = "Git" },
-    d = { name = "Debug" },
-    l = { name = "LSP" },
-    s = { name = "Telescope" },
-    S = { name = "Session" },
-  }, { prefix = "<leader>" })
+    -- Prefixes
+    wk.register({
+      mode = { "n", "v" },
+      p = { name = "Packer" },
+      b = { name = "Buffer" },
+      g = { name = "Git" },
+      d = { name = "Debug" },
+      l = { name = "LSP" },
+      s = { name = "Telescope" },
+      S = { name = "Session" },
+    }, { prefix = "<leader>" })
+  end
 end
-wk = nil -- just in case I'm dumb enough to call despite maybe not existing
 
 -- Silent keymap option
 local opts = { silent = true }
@@ -130,6 +133,7 @@ keymap("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", opts)
 keymap("n", "<leader>gR", "<cmd>Gitsigns reset_buffer<CR>", opts)
 keymap("n", "<leader>gl", "<cmd>Gitsigns blame_line<CR>", opts)
 keymap("n", "<leader>gd", "<cmd>Gitsigns diffthis HEAD<CR>", opts)
+keymap("n", "<leader>gw", "<cmd>Gitsigns toggle_word_diff<CR>", opts)
 
 -- Comment
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)

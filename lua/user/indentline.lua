@@ -1,5 +1,6 @@
 local status_ok, indent_blankline = pcall(require, "indent_blankline")
 if not status_ok then
+  require 'user.health':warn('failed to load lua module "indent_blankline"')
   return
 end
 

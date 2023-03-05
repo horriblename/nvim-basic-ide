@@ -1,6 +1,7 @@
 -- Setup nvim-cmp.
 local status_ok, npairs = pcall(require, "nvim-autopairs")
 if not status_ok then
+  require 'user.health':warn('failed to load lua module "nvim-autopairs"')
   return
 end
 -- local Rule = require("nvim-autopairs.rule")
@@ -21,7 +22,6 @@ npairs.setup({
     javascript = { "string", "template_string" },
     java = false,
   },
-
   fast_wrap = {
     map = "<M-e>",
     chars = { "{", "(", "[", '"', "'" },

@@ -1,5 +1,6 @@
 local status_ok, illuminate = pcall(require, "illuminate")
 if not status_ok then
+  require 'user.health':warn('failed to load lua module "illuminate"')
   return
 end
 
