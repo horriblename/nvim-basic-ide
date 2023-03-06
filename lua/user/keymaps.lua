@@ -50,19 +50,14 @@ keymap("n", "<leader>bD", ":BufferLineSortByDirectory<CR>", opts)
 keymap("n", "<leader>bE", ":BufferLineSortByExtension<CR>", opts)
 keymap("n", "<leader>bp", ":BufferLineTogglePin<CR>", opts)
 
--- Persistence FIXME
-local p_ok, persistence = pcall(require, "persistence")
-if p_ok then
-  keymap("n", "<leader>Ss", persistence.save, { silent = true, desc = "Save session" })
-  keymap("n", "<leader>SQ", persistence.stop, { silent = true, desc = "Quit without saving session" })
-  keymap("n", "<leader>Sc", persistence.load, { silent = true, desc = "Restore last session for current dir" })
-  keymap("n", "<leader>Sl", function()
-    persistence.load({ last = true })
-  end, {
-    silent = true,
-    desc = "Restore last session",
-  })
-end
+-- Persistence
+keymap("n", "<leader>Ss", ":lua require'persistence'.save()<cr>", { silent = true, desc = "Save session" })
+keymap("n", "<leader>SQ", ":lua require'persistence'.stop()<cr>",
+  { silent = true, desc = "Quit without saving session" })
+keymap("n", "<leader>Sc", ":lua require'persistence'.load()<cr>",
+  { silent = true, desc = "Restore last session for current dir" })
+keymap("n", "<leader>Sl", ":lua require'persistence'.load({last = true})<cr>",
+  { silent = true, desc = "Restore last session", })
 
 -- NvimTree
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
