@@ -1,8 +1,9 @@
+-- type annotations may be broken but I'm too lazy to fix :D
 ---@class LogEntry
 ---@field type "info" | "warn"
 ---@field msg string
 
----@type {logs: LogEntry}
+---@type {logs: LogEntry[]}
 local M = {
   logs = {},
 }
@@ -25,8 +26,10 @@ function M.check()
   for _, entry in ipairs(M.logs) do
     if entry.type == 'info' then
       vim.health.report_info(entry.msg)
-    else
+    elseif entry.type == 'warn' then
       vim.health.report_warn(entry.msg)
+    else
+      vim.health.report_warn("Unknown Log Entry: " .. entry.msg)
     end
   end
 end
