@@ -109,12 +109,16 @@ local plugins = {
     }
   },
   -- Git
-  { "lewis6991/gitsigns.nvim",  lazy = false,                                  config = conf('gitsigns') },
+  { "lewis6991/gitsigns.nvim", lazy = false,                              config = conf('gitsigns') },
 
   -- DAP
-  { "mfussenegger/nvim-dap",    event = "CmdUndefined Dap*" },
-  { "rcarriga/nvim-dap-ui",     dependencies = { "mfussenegger/nvim-dap" } },
-  { "ravenxrz/DAPInstall.nvim", cmd = { "DIInstall", "DIList", "DIUninstall" } },
+  { "mfussenegger/nvim-dap",   event = "CmdUndefined Dap*",               config = conf('dap') },
+  { "rcarriga/nvim-dap-ui",    dependencies = { "mfussenegger/nvim-dap" } },
+  {
+    "ravenxrz/DAPInstall.nvim",
+    dependencies = { "mfussenegger/nvim-dap" },
+    cmd = { "DIInstall", "DIList", "DIUninstall" }
+  },
 
   -- Other Plugins
   {
