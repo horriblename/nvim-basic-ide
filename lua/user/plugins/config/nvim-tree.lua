@@ -81,6 +81,8 @@ nvim_tree.setup {
       { key = { "<C-t>", "c", "d", "D" }, action = nil },
       { key = "i",                        action = api.node.show_info_popup },
       { key = "y",                        action = api.fs.copy.node },
+      { key = "x",                        action = api.fs.cut },
+      { key = "p",                        action = api.fs.paste },
       { key = "v",                        action = api.node.open.vertical },
       { key = "s",                        action = api.node.open.horizontal },
       { key = "T",                        action = api.node.open.tab },
