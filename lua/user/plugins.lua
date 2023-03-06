@@ -34,70 +34,87 @@ end
 -- Install your plugins here
 -- return packer.startup(function(use)
 local plugins = {
+  -- Colorschemes
+  { "folke/tokyonight.nvim",                       lazy = false,      config = conf('tokyonight') },
+
   -- My plugins here
   { "nvim-lua/plenary.nvim",                       lazy = false }, -- Useful lua functions d by lots of plugins
-  { "windwp/nvim-autopairs",                       lazy = false, config = conf('autopairs') },
-  { "numToStr/Comment.nvim",                       lazy = false, config = conf('comment') },
+  { "windwp/nvim-autopairs",                       event = "BufRead", config = conf('autopairs') },
+  { "numToStr/Comment.nvim",                       lazy = false,      config = conf('comment') },
   { "JoosepAlviste/nvim-ts-context-commentstring", lazy = false },
   { "kyazdani42/nvim-web-devicons",                lazy = false },
-  { "kyazdani42/nvim-tree.lua",                    lazy = false, config = conf('nvim-tree') },
-  { "akinsho/bufferline.nvim",                     lazy = false, config = conf('bufferline') },
-  { "moll/vim-bbye",                               lazy = false },
-  { "nvim-lualine/lualine.nvim",                   lazy = false, config = conf('lualine') },
-  { "akinsho/toggleterm.nvim",                     lazy = false, config = conf('toggleterm') },
-  { "ahmedkhalf/project.nvim",                     lazy = false, config = conf('project') },
-  { "lewis6991/impatient.nvim",                    lazy = false, config = conf('impatient') },
-  { "lukas-reineke/indent-blankline.nvim",         lazy = false, config = conf('indentline') },
-  { "goolord/alpha-nvim",                          lazy = false, config = conf('alpha') },
-
-  -- Colorschemes
-  { "folke/tokyonight.nvim",                       lazy = false },
-  --  { "lunarvim/darkplus.nvim", lazy = false }
+  { "kyazdani42/nvim-tree.lua",                    lazy = false,      config = conf('nvim-tree') },
+  {
+    "akinsho/bufferline.nvim",
+    lazy = false,
+    config = conf('bufferline'),
+    dependencies = { "folke/tokyonight.nvim" }
+  },
+  { "moll/vim-bbye",                       lazy = false },
+  { "nvim-lualine/lualine.nvim",           lazy = false,      config = conf('lualine') },
+  { "akinsho/toggleterm.nvim",             lazy = false,      config = conf('toggleterm') },
+  { "ahmedkhalf/project.nvim",             lazy = false,      config = conf('project') },
+  { "lewis6991/impatient.nvim",            lazy = false,      config = conf('impatient') },
+  { "lukas-reineke/indent-blankline.nvim", event = "BufRead", config = conf('indentline') },
+  { "goolord/alpha-nvim",                  cmd = 'Alpha',     config = conf('alpha') },
 
   -- cmp plugins
-  { "hrsh7th/nvim-cmp",                            lazy = false, config = conf('cmp') },
-  { "hrsh7th/cmp-buffer",                          lazy = false },
-  { "hrsh7th/cmp-path",                            lazy = false },
-  { "saadparwaiz1/cmp_luasnip",                    lazy = false },
-  { "hrsh7th/cmp-nvim-lsp",                        lazy = false },
-  { "hrsh7th/cmp-nvim-lua",                        lazy = false },
+  {
+    "hrsh7th/nvim-cmp",
+    event = "BufRead",
+    config = conf('cmp'),
+    dependencies = {
+      { "hrsh7th/cmp-buffer" },
+      { "hrsh7th/cmp-path" },
+      { "saadparwaiz1/cmp_luasnip" },
+      { "hrsh7th/cmp-nvim-lsp" },
+      { "hrsh7th/cmp-nvim-lua" },
+      -- snippets
+      { "L3MON4D3/LuaSnip" },             --snippet engine
+      { "rafamadriz/friendly-snippets" }, -- a bunch of snippets to
+    }
+  },
 
-  -- snippets
-  { "L3MON4D3/LuaSnip",                            lazy = false }, --snippet engine
-  { "rafamadriz/friendly-snippets",                lazy = false }, -- a bunch of snippets to
 
   -- LSP
-  --  { "williamboman/nvim-lsp-installer", lazy = false } -- simple to  language server installer
-  { "neovim/nvim-lspconfig",                       lazy = false }, -- enable LSP
-  { "williamboman/mason.nvim",                     lazy = false },
-  { "williamboman/mason-lspconfig.nvim",           lazy = false },
-  { "jose-elias-alvarez/null-ls.nvim",             lazy = false }, -- for formatters and linters
-  { "RRethy/vim-illuminate",                       lazy = false, config = conf('illuminate') },
+  { "neovim/nvim-lspconfig",             lazy = false }, -- enable LSP
+  { "williamboman/mason.nvim",           lazy = false },
+  { "williamboman/mason-lspconfig.nvim", lazy = false },
+  { "jose-elias-alvarez/null-ls.nvim",   lazy = false }, -- for formatters and linters
+  { "RRethy/vim-illuminate",             event = "BufRead", config = conf('illuminate') },
 
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
-    lazy = false,
-    config = conf(
-      'telescope')
-  },
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    lazy = false,
-    build = {
-      "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+    cmd = 'Telescope',
+    config = conf('telescope'),
+    dependencies = {
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = {
+          "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+        }
+      },
     }
   },
-
   -- Treesitter
-  { "nvim-treesitter/nvim-treesitter", lazy = false, config = conf("treesitter"), },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    lazy = false,
+    config = conf("treesitter"),
+    dependencies = {
+      -- treesitter plugins
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      "mrjones2014/nvim-ts-rainbow",
+    }
+  },
   -- Git
-  { "lewis6991/gitsigns.nvim",         lazy = false, config = conf('gitsigns') },
+  { "lewis6991/gitsigns.nvim",  lazy = false,                                  config = conf('gitsigns') },
 
   -- DAP
-  { "mfussenegger/nvim-dap",           lazy = false },
-  { "rcarriga/nvim-dap-ui",            lazy = false },
-  { "ravenxrz/DAPInstall.nvim",        lazy = false },
+  { "mfussenegger/nvim-dap",    event = "CmdUndefined Dap*" },
+  { "rcarriga/nvim-dap-ui",     dependencies = { "mfussenegger/nvim-dap" } },
+  { "ravenxrz/DAPInstall.nvim", cmd = { "DIInstall", "DIList", "DIUninstall" } },
 
   -- Other Plugins
   {
@@ -133,7 +150,6 @@ local plugins = {
   },
   { "gpanders/editorconfig.nvim", event = "BufRead" },
   { "simnalamburt/vim-mundo",     cmd = "MundoToggle" },
-  { "mattn/libcallex-vim",        run = { "make -C autoload" } },
   {
     "bytesnake/vim-graphical-preview",
     ft = { "*.graphics", "graphical-preview" },
@@ -142,20 +158,6 @@ local plugins = {
       return not vim.g.neovide and not vim.g.goneovim
     end,
     dependencies = { { "mattn/libcallex-vim", build = "make -C autoload" } },
-  },
-  {
-    -- TODO remove?
-    "abecodes/tabout.nvim",
-    enabled = false,
-    event = "BufRead",
-    dependencies = { "nvim-treesitter" },
-    config = function()
-      require("tabout").setup({
-        tabkey = nil,
-        backwards_tabkey = nil,
-        act_as_tab = false,
-      })
-    end,
   },
   { "nvim-telescope/telescope-ui-select.nvim" },
   {
@@ -166,7 +168,6 @@ local plugins = {
     end,
   },
   -- treesitter plugins
-  { "nvim-treesitter/nvim-treesitter-textobjects" },
   {
     "romgrk/nvim-treesitter-context",
     dependencies = { "nvim-treesitter" },
@@ -231,28 +232,21 @@ local plugins = {
   },
 
   {
-    "p00f/nvim-ts-rainbow",
-    event = "BufRead",
-    dependencies = { "nvim-treesitter" },
-  },
-
-  {
-    "folke/persistence.nvim",
-    -- event = "BufReadPre", -- this will only start session saving when an actual file was opened
-    -- module = "persistence",
-    config = function()
-      require("persistence").setup({
-        dir = vim.fn.stdpath("state") .. "/sessions/", -- directory where session files are saved
-      })
-    end,
-  },
-
-  {
     "nvim-treesitter/playground",
     dependencies = { "nvim-treesitter" },
     cmd = { "TSPlaygroundToggle", "TSCaptureUnderCursor" },
     config = function()
       require("nvim-treesitter.configs").setup({})
+    end,
+  },
+
+  {
+    "folke/persistence.nvim",
+    -- event = "BufReadPre", -- this will only start session saving when an actual file was opened
+    config = function()
+      require("persistence").setup({
+        dir = vim.fn.stdpath("state") .. "/sessions/", -- directory where session files are saved
+      })
     end,
   },
 
@@ -302,10 +296,10 @@ local plugins = {
       })
     end,
   },
-  { "jpalardy/vim-slime",          ft = "python" },
-  { "hanschen/vim-ipython-cell",   ft = "python" },
-  { "elkowar/yuck.vim",            ft = "yuck" },
-  { "gpanders/nvim-parinfer",      cmd = { "ParinferOn", "ParinferToggle" } },
+  { "jpalardy/vim-slime",        ft = "python" },
+  { "hanschen/vim-ipython-cell", ft = "python" },
+  { "elkowar/yuck.vim",          ft = "yuck" },
+  { "gpanders/nvim-parinfer",    cmd = { "ParinferOn", "ParinferToggle" } },
   {
     "simrat39/rust-tools.nvim",
     -- ft = { "rust", "rs" }, -- IMPORTANT: re-enabling this seems to break inlay-hints
