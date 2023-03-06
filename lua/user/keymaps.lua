@@ -23,14 +23,11 @@ keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- Plugins --
--- Packer
-keymap("n", "<leader>ps", ":PackerSync<CR>", opts)
-keymap("n", "<leader>pS", ":PackerStatus<CR>", opts)
-keymap("n", "<leader>pu", ":PackerUpdate<CR>", opts)
-keymap("n", "<leader>pc", ":PackerCompile<CR>", opts)
-keymap("n", "<leader>prs", ":PackerSnapshot", {})
-keymap("n", "<leader>prr", ":PackerSnapshotRollback", {})
-keymap("n", "<leader>prd", ":PackerSnapshotDelete", {})
+-- Lazy
+keymap("n", "<leader>ps", ":Lazy sync<CR>", opts)
+keymap("n", "<leader>pS", ":Lazy show<CR>", opts)
+keymap("n", "<leader>pu", ":Lazy update<CR>", opts)
+keymap("n", "<leader>pb", ":Lazy build<CR>", opts)
 
 -- Alpha
 keymap("n", "<leader>;", ":Alpha<CR>", opts)
