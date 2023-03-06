@@ -65,9 +65,7 @@ nvim_tree.setup {
   },
   on_attach = function(bufnr)
     -- local inject_node = require('nvim-tree.utils').inject_node
-    local dispatcher = function(action)
-      return function() require('nvim-tree.actions.dispatch').dispatch(action) end
-    end
+    local api = require 'nvim-tree.api'
 
     local bind = function(key, action)
       if action == nil then
@@ -81,17 +79,17 @@ nvim_tree.setup {
 
     local mappings = {
       { key = { "<C-t>", "c", "d", "D" }, action = nil },
-      { key = "i",                        action = dispatcher "toggle_file_info" },
-      { key = "y",                        action = dispatcher "copy" },
-      { key = "v",                        action = dispatcher "vsplit" },
-      { key = "s",                        action = dispatcher "split" },
-      { key = "T",                        action = dispatcher "tabnew" },
+      { key = "i",                        action = api.node.show_info_popup },
+      { key = "y",                        action = api.fs.copy.node },
+      { key = "v",                        action = api.node.open.vertical },
+      { key = "s",                        action = api.node.open.horizontal },
+      { key = "T",                        action = api.node.open.tab },
       -- { key = "cf", action = dispatcher "copy_name" },
-      { key = "cl",                       action = dispatcher "copy_absolute_path" },
-      { key = "gx",                       action = dispatcher "system_open" },
-      { key = "l",                        action = dispatcher "edit" },
-      { key = "dd",                       action = dispatcher "trash" },
-      { key = "DD",                       action = dispatcher "remove" },
+      { key = "cl",                       action = api.fs.copy.absolut_path },
+      { key = "gx",                       action = api.node.run.system },
+      { key = "l",                        action = api.node.open.edit },
+      { key = "dd",                       action = api.fs.trash },
+      { key = "DD",                       action = api.fs.remove },
       { key = "Z",                        action = ':Z ' },
 
       { key = 'gh',                       action = ':cd ~/ <cr>' },
