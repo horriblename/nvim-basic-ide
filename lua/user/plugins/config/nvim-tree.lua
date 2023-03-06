@@ -90,6 +90,7 @@ nvim_tree.setup {
       { key = "l",                        action = api.node.open.edit },
       { key = "dd",                       action = api.fs.trash },
       { key = "DD",                       action = api.fs.remove },
+      { key = "r",                        action = api.fs.rename },
       { key = "Z",                        action = ':Z ' },
 
       { key = 'gh',                       action = ':cd ~/ <cr>' },
