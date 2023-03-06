@@ -131,7 +131,6 @@ keymap({ "n", "v" }, "]m", "<cmd>AerialNext<CR>", {})
 
 -- LSP
 keymap("n", "<leader>li", "<cmd>LspInfo<cr>", opts)
-keymap("n", "<leader>lI", "<cmd>LspInstallInfo<cr>", opts)
 keymap("n", "<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", opts)
 
 -- Paste Image
