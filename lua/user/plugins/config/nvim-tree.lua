@@ -79,6 +79,7 @@ nvim_tree.setup {
 
     local mappings = {
       { key = { "<C-t>", "c", "d", "D" }, action = nil },
+      { key = "a",                        action = api.fs.create },
       { key = "i",                        action = api.node.show_info_popup },
       { key = "y",                        action = api.fs.copy.node },
       { key = "x",                        action = api.fs.cut },
