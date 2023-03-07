@@ -34,26 +34,25 @@ end
 -- Install your plugins here
 -- return packer.startup(function(use)
 local plugins = {
-  -- Colorschemes
-  { "folke/tokyonight.nvim",        lazy = false,           config = conf('tokyonight') },
-
-  -- My plugins here
-  { "nvim-lua/plenary.nvim",        lazy = false }, -- Useful lua functions d by lots of plugins
-  { "windwp/nvim-autopairs",        event = "BufRead",      config = conf('autopairs') },
-  { "numToStr/Comment.nvim",        event = "BufRead",      config = conf('comment') },
+  -- do not lazy load
+  { "folke/tokyonight.nvim",        lazy = false, config = conf('tokyonight') },
   { "kyazdani42/nvim-web-devicons", lazy = false },
-  { "kyazdani42/nvim-tree.lua",     cmd = "NvimTreeToggle", config = conf('nvim-tree') },
+  { "nvim-lualine/lualine.nvim",    lazy = false, config = conf('lualine') },
+  { "ahmedkhalf/project.nvim",      lazy = false, config = conf('project') },
+  { "lewis6991/impatient.nvim",     lazy = false, config = conf('impatient') },
   {
     "akinsho/bufferline.nvim",
     lazy = false,
     config = conf('bufferline'),
     dependencies = { "folke/tokyonight.nvim" }
   },
+
+  -- My plugins here
+  { "windwp/nvim-autopairs",               event = "BufRead",              config = conf('autopairs') },
+  { "numToStr/Comment.nvim",               event = "BufRead",              config = conf('comment') },
+  { "kyazdani42/nvim-tree.lua",            cmd = "NvimTreeToggle",         config = conf('nvim-tree') },
   { "moll/vim-bbye",                       cmd = { "Bdelete", "Bwipeout" } },
-  { "nvim-lualine/lualine.nvim",           lazy = false,                   config = conf('lualine') },
   { "akinsho/toggleterm.nvim",             cmd = "ToggleTerm",             config = conf('toggleterm') },
-  { "ahmedkhalf/project.nvim",             lazy = false,                   config = conf('project') },
-  { "lewis6991/impatient.nvim",            lazy = false,                   config = conf('impatient') },
   { "lukas-reineke/indent-blankline.nvim", event = "BufRead",              config = conf('indentline') },
   { "goolord/alpha-nvim",                  cmd = 'Alpha',                  config = conf('alpha') },
 
