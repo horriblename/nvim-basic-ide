@@ -35,28 +35,27 @@ end
 -- return packer.startup(function(use)
 local plugins = {
   -- Colorschemes
-  { "folke/tokyonight.nvim",                       lazy = false,      config = conf('tokyonight') },
+  { "folke/tokyonight.nvim",        lazy = false,           config = conf('tokyonight') },
 
   -- My plugins here
-  { "nvim-lua/plenary.nvim",                       lazy = false }, -- Useful lua functions d by lots of plugins
-  { "windwp/nvim-autopairs",                       event = "BufRead", config = conf('autopairs') },
-  { "numToStr/Comment.nvim",                       lazy = false,      config = conf('comment') },
-  { "JoosepAlviste/nvim-ts-context-commentstring", lazy = false },
-  { "kyazdani42/nvim-web-devicons",                lazy = false },
-  { "kyazdani42/nvim-tree.lua",                    lazy = false,      config = conf('nvim-tree') },
+  { "nvim-lua/plenary.nvim",        lazy = false }, -- Useful lua functions d by lots of plugins
+  { "windwp/nvim-autopairs",        event = "BufRead",      config = conf('autopairs') },
+  { "numToStr/Comment.nvim",        event = "BufRead",      config = conf('comment') },
+  { "kyazdani42/nvim-web-devicons", lazy = false },
+  { "kyazdani42/nvim-tree.lua",     cmd = "NvimTreeToggle", config = conf('nvim-tree') },
   {
     "akinsho/bufferline.nvim",
     lazy = false,
     config = conf('bufferline'),
     dependencies = { "folke/tokyonight.nvim" }
   },
-  { "moll/vim-bbye",                       lazy = false },
-  { "nvim-lualine/lualine.nvim",           lazy = false,      config = conf('lualine') },
-  { "akinsho/toggleterm.nvim",             lazy = false,      config = conf('toggleterm') },
-  { "ahmedkhalf/project.nvim",             lazy = false,      config = conf('project') },
-  { "lewis6991/impatient.nvim",            lazy = false,      config = conf('impatient') },
-  { "lukas-reineke/indent-blankline.nvim", event = "BufRead", config = conf('indentline') },
-  { "goolord/alpha-nvim",                  cmd = 'Alpha',     config = conf('alpha') },
+  { "moll/vim-bbye",                       cmd = { "Bdelete", "Bwipeout" } },
+  { "nvim-lualine/lualine.nvim",           lazy = false,                   config = conf('lualine') },
+  { "akinsho/toggleterm.nvim",             cmd = "ToggleTerm",             config = conf('toggleterm') },
+  { "ahmedkhalf/project.nvim",             lazy = false,                   config = conf('project') },
+  { "lewis6991/impatient.nvim",            lazy = false,                   config = conf('impatient') },
+  { "lukas-reineke/indent-blankline.nvim", event = "BufRead",              config = conf('indentline') },
+  { "goolord/alpha-nvim",                  cmd = 'Alpha',                  config = conf('alpha') },
 
   -- cmp plugins
   {
@@ -107,10 +106,11 @@ local plugins = {
       -- treesitter plugins
       "nvim-treesitter/nvim-treesitter-textobjects",
       "mrjones2014/nvim-ts-rainbow",
+      "JoosepAlviste/nvim-ts-context-commentstring",
     }
   },
   -- Git
-  { "lewis6991/gitsigns.nvim", lazy = false,                              config = conf('gitsigns') },
+  { "lewis6991/gitsigns.nvim", event = "BufReadPre",                      config = conf('gitsigns') },
 
   -- DAP
   { "mfussenegger/nvim-dap",   event = "CmdUndefined Dap*",               config = conf('dap') },
