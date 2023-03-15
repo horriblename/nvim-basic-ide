@@ -75,7 +75,6 @@ keymap("n", "<leader>sQ", ":Telescope quickfix_history<CR>", opts)
 keymap("n", "<leader>sH", ":Telescope help_tags<CR>", opts)
 
 -- Git
-keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { silent = true, desc = "Lazygit" })
 keymap("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { silent = true, desc = "Checkout commit" })
 keymap(
   "n",
@@ -85,6 +84,7 @@ keymap(
 )
 keymap("n", "<leader>gb", "<cmd>Telescope git_branches<CR>", { silent = true, desc = "Checkout branch" })
 keymap("n", "<leader>go", "<cmd>Telescope git_status<CR>", { silent = true, desc = "Open changed file" })
+keymap("n", "<leader>gg", function() require 'user.plugins.config.toggleterm'.lazygit() end, opts)
 
 keymap("n", "<leader>gj", "<cmd>Gitsigns next_hunk<CR>", opts)
 keymap("n", "<leader>gk", "<cmd>Gitsigns prev_hunk<CR>", opts)

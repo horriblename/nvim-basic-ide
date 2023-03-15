@@ -99,7 +99,7 @@ vim.cmd("autocmd! TermOpen term://*#toggleterm#* setl winbar=%!v:lua._G.TermBar(
 
 local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
 
-function _LAZYGIT_TOGGLE()
+function M.lazygit()
   lazygit:toggle()
 end
 
