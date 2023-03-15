@@ -67,16 +67,22 @@ nvim_tree.setup {
     -- local inject_node = require('nvim-tree.utils').inject_node
     local api = require 'nvim-tree.api'
 
-    local bind = function(key, action)
+    ---helper function to bind keys
+    ---@param key string
+    ---@param action string|fun()
+    ---@param opts table|nil
+    local function bind(key, action, opts)
+      opts = vim.tbl_extend("force", { buffer = bufnr, nowait = true }, opts or {})
       if action == nil then
         -- keymap may not exist?
         pcall(vim.keymap.del, 'n', key, { buffer = bufnr })
       else
-        vim.keymap.set('n', key, action, { buffer = bufnr, nowait = true })
+        vim.keymap.set('n', key, action, opts)
       end
     end
 
 
+    ---@type { key: string|string[], action: fun()|string|nil, opts: table|nil }[]
     local mappings = {
       { key = { "<C-t>", "c", "d", "D" }, action = nil },
       { key = "a",                        action = api.fs.create },
@@ -87,10 +93,12 @@ nvim_tree.setup {
       { key = "v",                        action = api.node.open.vertical },
       { key = "s",                        action = api.node.open.horizontal },
       { key = "T",                        action = api.node.open.tab },
+      { key = "<leader>zi",               action = api.tree.toggle_gitignore_filter },
       -- { key = "cf", action = dispatcher "copy_name" },
       { key = "cl",                       action = api.fs.copy.absolut_path },
       { key = "gx",                       action = api.node.run.system },
       { key = "l",                        action = api.node.open.edit },
+      { key = "<CR>",                     action = api.node.open.edit },
       { key = "dd",                       action = api.fs.trash },
       { key = "DD",                       action = api.fs.remove },
       { key = "r",                        action = api.fs.rename },
@@ -126,10 +134,10 @@ nvim_tree.setup {
 
     for _, mapping in ipairs(mappings) do
       if type(mapping.key) == "string" then
-        bind(mapping.key, mapping.action)
+        bind(mapping.key --[[@as string]], mapping.action, mapping.opts)
       else
-        for _, key in ipairs(mapping.key) do
-          bind(key, mapping.action)
+        for _, key in ipairs(mapping.key --[=[@as string[]]=]) do
+          bind(key, mapping.action, mapping.opts)
         end
       end
     end
