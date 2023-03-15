@@ -89,6 +89,7 @@ local plugins = {
     cmd = 'Telescope',
     config = conf('telescope'),
     dependencies = {
+      "nvim-lua/plenary.nvim",
       {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = {
