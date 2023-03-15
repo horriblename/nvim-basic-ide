@@ -3,6 +3,12 @@ local keymap = vim.keymap.set
 -- Silent keymap option
 local opts = { silent = true }
 
+---@param desc string
+---@return { silent: boolean, desc: string }
+local function withDesc(desc)
+  return { silent = true, desc = desc }
+end
+
 --Remap space as leader key
 -- keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
@@ -51,13 +57,10 @@ keymap("n", "<leader>bE", ":BufferLineSortByExtension<CR>", opts)
 keymap("n", "<leader>bp", ":BufferLineTogglePin<CR>", opts)
 
 -- Persistence
-keymap("n", "<leader>Ss", ":lua require'persistence'.save()<cr>", { silent = true, desc = "Save session" })
-keymap("n", "<leader>SQ", ":lua require'persistence'.stop()<cr>",
-  { silent = true, desc = "Quit without saving session" })
-keymap("n", "<leader>Sc", ":lua require'persistence'.load()<cr>",
-  { silent = true, desc = "Restore last session for current dir" })
-keymap("n", "<leader>Sl", ":lua require'persistence'.load({last = true})<cr>",
-  { silent = true, desc = "Restore last session", })
+keymap("n", "<leader>Ss", ":lua require'persistence'.save()<cr>", withDesc("Save session"))
+keymap("n", "<leader>SQ", ":lua require'persistence'.stop()<cr>", withDesc("Quit without saving session"))
+keymap("n", "<leader>Sc", ":lua require'persistence'.load()<cr>", withDesc("Restore last session for current dir"))
+keymap("n", "<leader>Sl", ":lua require'persistence'.load({last = true})<cr>", withDesc("Restore last session"))
 
 -- NvimTree
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
@@ -75,16 +78,11 @@ keymap("n", "<leader>sQ", ":Telescope quickfix_history<CR>", opts)
 keymap("n", "<leader>sH", ":Telescope help_tags<CR>", opts)
 
 -- Git
-keymap("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { silent = true, desc = "Checkout commit" })
-keymap(
-  "n",
-  "<leader>gC",
-  "<cmd>Telescope git_bcommits<CR>",
-  { silent = true, desc = "Checkout commit for current file" }
-)
-keymap("n", "<leader>gb", "<cmd>Telescope git_branches<CR>", { silent = true, desc = "Checkout branch" })
-keymap("n", "<leader>go", "<cmd>Telescope git_status<CR>", { silent = true, desc = "Open changed file" })
-keymap("n", "<leader>gg", function() require 'user.plugins.config.toggleterm'.lazygit() end, opts)
+keymap("n", "<leader>gg", function() require 'user.plugins.config.toggleterm'.lazygit() end, withDesc("Lazygit"))
+keymap("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", withDesc("Checkout commit"))
+keymap("n", "<leader>gC", "<cmd>Telescope git_bcommits<CR>", withDesc("Checkout commit for current file"))
+keymap("n", "<leader>gb", "<cmd>Telescope git_branches<CR>", withDesc("Checkout branch"))
+keymap("n", "<leader>go", "<cmd>Telescope git_status<CR>", withDesc("Open changed file"))
 
 keymap("n", "<leader>gj", "<cmd>Gitsigns next_hunk<CR>", opts)
 keymap("n", "<leader>gk", "<cmd>Gitsigns prev_hunk<CR>", opts)
@@ -129,10 +127,7 @@ keymap("n", "<leader>li", "<cmd>LspInfo<cr>", opts)
 keymap("n", "<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", opts)
 
 -- Paste Image
-keymap("n", "<leader>P", "<cmd>call mdip#MarkdownClipboardImage()<CR>", {
-  silent = true,
-  desc = "Paste Image from Clipboard",
-})
+keymap("n", "<leader>P", "<cmd>call mdip#MarkdownClipboardImage()<CR>", withDesc("Paste Image from Clipboard"))
 
 -- Quick Settings
 keymap("n", "<leader>zf", function()
