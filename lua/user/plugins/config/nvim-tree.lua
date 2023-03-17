@@ -115,6 +115,7 @@ nvim_tree.setup {
       { key = "B",                        action = api.tree.toggle_no_buffer_filter },
       { key = "E",                        action = api.tree.expand_all },
       { key = "F",                        action = api.live_filter.start },
+      { key = "m",                        action = api.marks.toggle },
 
       -- Git and Diagnostics
       { key = "<leader>gj",               action = api.node.navigate.git.next },
