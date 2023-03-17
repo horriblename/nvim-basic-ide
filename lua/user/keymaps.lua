@@ -40,7 +40,7 @@ keymap("n", "<leader>;", ":Alpha<CR>", opts)
 keymap("n", "<leader>t", ":tabnew +Alpha %<CR>", opts)
 
 -- ToggleTerm
--- keymap({ "n", "i" }, "<M-x>", "<cmd>ToggleTerm<CR>", opts)
+keymap({ "n", "i", "t" }, "<M-x>", "<cmd>ToggleTerm<CR>", opts)
 
 -- BufferLine/buffer control
 keymap({ "n", "i" }, "<M-n>", "<cmd>BufferLineCycleNext<CR>", opts)
@@ -78,7 +78,7 @@ keymap("n", "<leader>sQ", ":Telescope quickfix_history<CR>", opts)
 keymap("n", "<leader>sH", ":Telescope help_tags<CR>", opts)
 
 -- Git
-keymap("n", "<leader>gg", function() require 'user.plugins.config.toggleterm'.lazygit() end, withDesc("Lazygit"))
+keymap("n", "<leader>gg", function() require 'user.plugins.lazygit'.lazygit() end, withDesc("Lazygit"))
 keymap("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", withDesc("Checkout commit"))
 keymap("n", "<leader>gC", "<cmd>Telescope git_bcommits<CR>", withDesc("Checkout commit for current file"))
 keymap("n", "<leader>gb", "<cmd>Telescope git_branches<CR>", withDesc("Checkout branch"))
