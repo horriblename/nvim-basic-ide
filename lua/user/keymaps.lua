@@ -115,6 +115,7 @@ keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
 keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
 keymap("n", "<leader>dS", "<cmd>lua require'dap'.close()<cr>", opts)
 keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
+keymap({"n", "v"}, "<leader>dd", "<cmd>lua require'dapui'.eval()", withDesc("Evaluate Expression on Cursor"))
 
 -- Aerial
 -- Toggle the aerial window with <leader>a
