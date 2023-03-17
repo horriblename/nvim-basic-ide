@@ -132,6 +132,9 @@ local plugins = {
         operators = {
           ds = "De-surround",
         },
+        triggers_blacklist = {
+          n = { "v" }
+        }
       })
       vim.opt.timeoutlen = 0
 
