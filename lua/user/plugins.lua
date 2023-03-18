@@ -112,13 +112,22 @@ local plugins = {
   { "lewis6991/gitsigns.nvim", event = "BufReadPre",                      config = conf('gitsigns') },
 
   -- DAP
-  { "mfussenegger/nvim-dap",   event = "CmdUndefined Dap*",               config = conf('dap') },
-  { "rcarriga/nvim-dap-ui",    dependencies = { "mfussenegger/nvim-dap" } },
   {
-    "ravenxrz/DAPInstall.nvim",
-    dependencies = { "mfussenegger/nvim-dap" },
-    cmd = { "DIInstall", "DIList", "DIUninstall" }
+    -- DAPInstall and nvim-dap is initialized together in conf('dap')
+    "mfussenegger/nvim-dap",
+    event = "CmdUndefined Dap*",
+    config = conf('dap'),
+    dependencies = {
+      {
+        "ravenxrz/DAPInstall.nvim",
+        cmd = { "DIInstall", "DIList", "DIUninstall" },
+        -- let nvim-dap handle config in conf('dap')
+        config = function()
+        end
+      }
+    }
   },
+  { "rcarriga/nvim-dap-ui",    dependencies = { "mfussenegger/nvim-dap" } },
 
   -- Other Plugins
   {
