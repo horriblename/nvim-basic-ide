@@ -87,15 +87,16 @@ keymap("n", "<leader>go", "<cmd>Telescope git_status<CR>", withDesc("Open change
 keymap("n", "<leader>gj", "<cmd>Gitsigns next_hunk<CR>", opts)
 keymap("n", "<leader>gk", "<cmd>Gitsigns prev_hunk<CR>", opts)
 
-keymap("n", "<leader>gs", "<cmd>Gitsigns stage_hunk<CR>", opts)
+keymap({ "n", "v" }, "<leader>gs", "<cmd>Gitsigns stage_hunk<CR>", opts)
 keymap("n", "<leader>gu", "<cmd>Gitsigns undo_stage_hunk<CR>", opts)
-keymap("v", "<leader>gs", "<cmd>Gitsigns stage_hunk<CR>", opts)
 keymap("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<CR>", opts)
-keymap("n", "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", opts)
+keymap({ "n", "v" }, "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", opts)
 keymap("n", "<leader>gR", "<cmd>Gitsigns reset_buffer<CR>", opts)
 keymap("n", "<leader>gl", "<cmd>Gitsigns blame_line<CR>", opts)
 keymap("n", "<leader>gd", "<cmd>Gitsigns diffthis HEAD<CR>", opts)
 keymap("n", "<leader>gw", "<cmd>Gitsigns toggle_word_diff<CR>", opts)
+
+keymap("v", "ag", "<cmd>Gitsigns select_hunk<CR>", opts)
 
 -- Comment
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
