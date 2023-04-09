@@ -109,7 +109,8 @@ local plugins = {
     }
   },
   -- Git
-  { "lewis6991/gitsigns.nvim", event = "BufReadPre",                      config = conf('gitsigns') },
+  { "lewis6991/gitsigns.nvim", event = "BufReadPre",                  config = conf('gitsigns') },
+  { "sindrets/diffview.nvim",  dependencies = "nvim-lua/plenary.nvim" },
 
   -- DAP
   {
@@ -127,7 +128,7 @@ local plugins = {
       }
     }
   },
-  { "rcarriga/nvim-dap-ui",    dependencies = { "mfussenegger/nvim-dap" } },
+  { "rcarriga/nvim-dap-ui",       dependencies = { "mfussenegger/nvim-dap" } },
 
   -- Other Plugins
   {
