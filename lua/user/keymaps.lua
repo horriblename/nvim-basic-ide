@@ -74,8 +74,9 @@ keymap("n", "<leader>st", ":Telescope live_grep<CR>", opts)
 keymap("n", "<leader>sp", ":Telescope projects<CR>", opts)
 keymap("n", "<leader>sb", ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>sq", ":Telescope quickfix<CR>", opts)
-keymap("n", "<leader>sQ", ":Telescope quickfix_history<CR>", opts)
+keymap("n", "<leader>sQ", ":Telescope quickfixhistory<CR>", opts)
 keymap("n", "<leader>sH", ":Telescope help_tags<CR>", opts)
+keymap("n", "<leader>ss", ":Telescope <CR>", opts)
 
 -- Git
 keymap("n", "<leader>gg", function() require 'user.plugins.lazygit'.lazygit() end, withDesc("Lazygit"))
