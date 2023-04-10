@@ -137,6 +137,9 @@ keymap({ "n", "v" }, "]m", "<cmd>AerialNext<CR>", {})
 keymap("n", "<leader>li", "<cmd>LspInfo<cr>", opts)
 keymap("n", "<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", opts)
 
+-- Mundo
+keymap("n", "<leader>u", "<cmd>MundoToggle<cr>", opts)
+
 -- Paste Image
 keymap("n", "<leader>P", "<cmd>call mdip#MarkdownClipboardImage()<CR>", withDesc("Paste Image from Clipboard"))
 
