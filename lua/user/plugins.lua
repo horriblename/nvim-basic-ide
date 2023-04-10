@@ -109,8 +109,8 @@ local plugins = {
     }
   },
   -- Git
-  { "lewis6991/gitsigns.nvim", event = "BufReadPre",                  config = conf('gitsigns') },
-  { "sindrets/diffview.nvim",  dependencies = "nvim-lua/plenary.nvim" },
+  { "lewis6991/gitsigns.nvim", event = "BufReadPre",                    config = conf('gitsigns') },
+  { "sindrets/diffview.nvim",  dependencies = "nvim-lua/plenary.nvim",  config = conf('diffview') },
 
   -- DAP
   {
@@ -154,6 +154,7 @@ local plugins = {
           p = { name = "Packer" },
           b = { name = "Buffer" },
           g = { name = "Git" },
+          gd = { name = "Diffview" },
           d = { name = "Debug" },
           l = { name = "LSP" },
           s = { name = "Telescope" },

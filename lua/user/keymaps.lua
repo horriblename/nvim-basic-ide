@@ -93,10 +93,18 @@ keymap("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<CR>", opts)
 keymap({ "n", "v" }, "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", opts)
 keymap("n", "<leader>gR", "<cmd>Gitsigns reset_buffer<CR>", opts)
 keymap("n", "<leader>gl", "<cmd>Gitsigns blame_line<CR>", opts)
-keymap("n", "<leader>gd", "<cmd>Gitsigns diffthis HEAD<CR>", opts)
+keymap("n", "<leader>gD", "<cmd>Gitsigns diffthis HEAD<CR>", opts)
 keymap("n", "<leader>gw", "<cmd>Gitsigns toggle_word_diff<CR>", opts)
 
 keymap("v", "ag", "<cmd>Gitsigns select_hunk<CR>", opts)
+
+-- Git Diffview
+keymap("n", "<leader>gdq", ":DiffviewClose<CR>", withDesc("Close Diffview"))
+keymap("n", "<leader>gdd", ":DiffviewOpen ", { desc = "Diff against rev" })
+keymap("n", "<leader>gdm", ":DiffviewOpen<CR>", withDesc("Merge/Rebase mode"))
+keymap("n", "<leader>gdh", ":DiffviewFileHistory %<CR>", withDesc("Browse Git History (Current File)"))
+keymap("n", "<leader>gdH", ":DiffviewFileHistory<CR>", withDesc("Browse Git History"))
+keymap("n", "<leader>gde", ":DiffviewToggleFiles<CR>", withDesc("Toggle Files Panel"))
 
 -- Comment
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
