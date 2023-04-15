@@ -166,8 +166,7 @@ local plugins = {
       )
     end
   },
-  { "gpanders/editorconfig.nvim", event = "BufReadPre" },
-  { "simnalamburt/vim-mundo",     cmd = "MundoToggle" },
+  { "simnalamburt/vim-mundo", cmd = "MundoToggle" },
   {
     "bytesnake/vim-graphical-preview",
     ft = { "*.graphics", "graphical-preview" },
